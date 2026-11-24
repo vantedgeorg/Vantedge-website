@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Research — Vantedge</title>
+<meta name="description" content="Published analysis from Vantedge members." />
+<link rel="icon" type="image/png" href="static/v2/logo-mark.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Inter:wght@500;600&family=Schibsted+Grotesk:wght@400;700&family=Tinos&display=swap" rel="stylesheet" />
+<style>
+  /* Tokens from the Figma file (Vantedge Website) */
+  :root{
+    --ink:#0c0e1e; --graphite:#1b1916; --paper:#fbfaf6; --cream:#ece9e0;
+    --stone-50:#f5f3ee; --stone-300:#e3dfd6; --stone-400:#cfcac0; --stone-700:#6e695f; --stone-750:#5e5a52;
+    --dark-label:#a39d91; --dark-border:#4a463f;
+    --body:'Geist', system-ui, -apple-system, sans-serif;
+    --inter:'Inter', system-ui, sans-serif;
+    --display:'Schibsted Grotesk', 'Inter', sans-serif;
+    --serif:'Tinos', 'Times New Roman', Times, serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--stone-50);color:var(--ink);font-family:var(--body);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  img{display:block}
+  a{color:inherit;text-decoration:none}
+  button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;text-align:left}
+  .frame{position:relative;width:100%;max-width:1440px;margin:0 auto}
+  .arrow18{width:18px;height:18px;flex:none}
+
+  /* ---------- Nav (19:111) ---------- */
+  .nav{position:fixed;top:0;left:0;right:0;z-index:50;padding:20px 80px 0}
+  .nav-bar{max-width:1280px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
+  .brand{display:flex;align-items:center;gap:11px}
+  .brand img{width:22px;height:22px}
+  .brand span{font-family:var(--serif);font-size:19px;letter-spacing:2.09px;text-transform:uppercase;color:var(--graphite)}
+  .links{position:relative;display:flex;align-items:center;gap:2px;padding:6px 6px 6px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.5);
+    background:rgba(251,250,246,.22);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+    box-shadow:0 1px 2px rgba(27,25,22,.04),0 10px 30px -12px rgba(27,25,22,.14),inset 0 1px 0 rgba(255,255,255,.75)}
+  .links a{font-size:14.5px;color:var(--graphite);padding:9px 16px;border-radius:999px;line-height:normal;transition:background .2s}
+  .links a:hover{background:rgba(251,250,246,.55)}
+  .links .gap{width:8px}
+  .links a.portal{background:var(--graphite);color:var(--cream);padding:10px 20px}
+  .menu-toggle{display:none}
+
+
+  /* ---------- Footer (8:163) ---------- */
+  footer{background:var(--graphite)}
+  footer .frame{padding:88px 80px 48px;display:flex;flex-direction:column;gap:72px}
+  .f-top{display:flex;justify-content:space-between;align-items:flex-start}
+  .f-brand{display:flex;flex-direction:column;gap:28px}
+  .lockup{display:flex;align-items:center;gap:14px}
+  .lockup img{width:30px;height:30px}
+  .lockup span{font-family:var(--serif);font-size:26px;letter-spacing:2.86px;text-transform:uppercase;color:var(--cream)}
+  .f-brand .tag-line{font-family:var(--inter);font-weight:600;font-size:44px;line-height:1.1;letter-spacing:-1.32px;color:var(--cream)}
+  .f-cols{display:flex;gap:96px;white-space:nowrap}
+  .f-cols div{display:flex;flex-direction:column;gap:16px}
+  .f-cols h4{font-weight:400;font-size:12px;letter-spacing:2.64px;text-transform:uppercase;color:var(--dark-label);line-height:normal}
+  .f-cols a{font-size:17px;color:var(--cream);line-height:normal}
+  .f-cols a:hover{color:#fff}
+  .legal{border-top:1px solid var(--dark-border);padding-top:32px;display:flex;flex-direction:column;gap:14px;font-size:13px;color:var(--dark-label)}
+  .legal p:first-child{max-width:1000px;line-height:1.7}
+
+
+  @media (max-width:900px){
+    .nav{padding:16px 20px 0}
+    .links{display:none;position:absolute;top:60px;right:20px;flex-direction:column;align-items:stretch;border-radius:18px;background:rgba(251,250,246,.9)}
+    .links.open{display:flex}
+    .links .gap{display:none}
+    .menu-toggle{display:grid;place-items:center;width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,255,255,.6);background:rgba(251,250,246,.5);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+    footer .frame{padding:64px 24px 40px;gap:48px}
+    .f-top{flex-direction:column;gap:48px}
+    .f-brand .tag-line{font-size:34px}
+    .f-cols{flex-wrap:wrap;gap:40px}
+  }
+</style>
+
+<style>
+  /* ---------- Research header (62:50) ---------- */
+  .r-head .frame{padding:200px 80px 96px;display:flex;flex-direction:column;gap:20px}
+  .r-head .kick{font-size:13px;letter-spacing:3.12px;text-transform:uppercase;color:var(--stone-700);line-height:normal}
+  .r-head h1{font-family:var(--inter);font-weight:600;font-size:72px;line-height:1.05;letter-spacing:-2.52px}
+  .r-head p{font-size:22px;line-height:1.55;color:var(--stone-750)}
+
+  /* ---------- Research content (62:67) ---------- */
+  .r-body .frame{padding:72px 80px 140px;display:flex;flex-direction:column;gap:40px}
+  .filters{display:flex;gap:10px;flex-wrap:wrap}
+  .chip{font-size:14px;line-height:normal;padding:10px 18px;border-radius:999px;border:1px solid var(--stone-400);color:var(--ink);transition:background .2s,border-color .2s,color .2s}
+  .chip:hover{border-color:var(--stone-750)}
+  .chip[aria-pressed="true"]{background:var(--stone-750);border-color:var(--stone-750);color:var(--paper)}
+  .grid{display:grid;grid-template-columns:repeat(3,minmax(0,405px));gap:32px;justify-content:space-between}
+  .report{display:flex;flex-direction:column;background:var(--paper);border:1px solid var(--stone-300);border-radius:12px;overflow:hidden;box-shadow:0 8px 24px -4px rgba(12,14,30,.05);transition:transform .3s ease,box-shadow .3s ease}
+  .report:hover{transform:translateY(-3px);box-shadow:0 14px 32px -6px rgba(12,14,30,.1)}
+  .report[hidden]{display:none}
+  .stage{height:280px;flex:none;background:#ece9e1;display:grid;place-items:center}
+  .stage img{width:168px;height:238px;object-fit:cover;object-position:top;box-shadow:0 10px 22px -4px rgba(12,14,30,.14);transition:transform .4s ease}
+  .report:hover .stage img{transform:scale(1.03)}
+  .r-text{padding:24px 26px 28px;display:flex;flex-direction:column;gap:12px}
+  .r-text .tag{font-size:12px;letter-spacing:2.16px;text-transform:uppercase;color:var(--stone-700);line-height:normal}
+  .r-text h3{font-family:var(--inter);font-weight:600;font-size:20px;line-height:1.25;letter-spacing:-.3px}
+  .r-text .by{font-size:14px;color:var(--stone-700);line-height:normal}
+  .r-text p{font-size:15px;line-height:1.55}
+  .r-text .read{margin-top:6px;align-self:flex-start;font-size:14px;line-height:normal;padding-bottom:3px;border-bottom:1px solid var(--ink)}
+  .more-wrap{padding-top:16px;display:flex;flex-direction:column;align-items:center;gap:18px}
+  .more-wrap .count{font-size:15px;color:var(--stone-700);line-height:normal}
+  .show-more{font-family:var(--body);font-weight:700;border-radius:999px;font-size:14px;letter-spacing:2.8px;text-transform:uppercase;line-height:normal;padding:16px 40px;border:1px solid var(--stone-700);text-align:center;transition:background .2s,color .2s}
+  .show-more:hover{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+  .show-more[hidden]{display:none}
+
+  @media (max-width:1439px){ .grid{grid-template-columns:repeat(3,minmax(0,1fr))} }
+  @media (max-width:1100px){ .grid{grid-template-columns:repeat(2,minmax(0,1fr))} }
+  @media (max-width:900px){
+    .r-head .frame{padding:120px 24px 48px}
+    .r-head h1{font-size:48px;letter-spacing:-1.6px}
+    .r-head p{font-size:18px}
+    .r-body .frame{padding:40px 24px 96px}
+  }
+  @media (max-width:640px){ .grid{grid-template-columns:1fr} }
+</style>
+
+</head>
+<body>
+
+<!-- ================= NAV ================= -->
+<header class="nav">
+  <div class="nav-bar">
+    <a class="brand" href="index.html#top" aria-label="Vantedge home"><img src="static/v2/logo-mark.png" alt="" /><span>Vantedge</span></a>
+    <button class="menu-toggle" aria-label="Menu" onclick="document.querySelector('.links').classList.toggle('open')">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2 5h14M2 13h14" stroke="#1B1916" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </button>
+    <nav class="links" aria-label="Main">
+      <a href="index.html#advisor">Advisor</a>
+      <a href="index.html#about">About</a>
+      <a href="index.html#partners">Partnerships</a>
+      <a href="research.html">Research</a>
+      <span class="gap"></span>
+      <a class="portal" href="portal.html">Portal</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+<section class="r-head">
+  <div class="frame">
+    <span class="kick">Research</span>
+    <h1>Research</h1>
+    <p>Published analysis from Vantedge members.</p>
+  </div>
+</section>
+
+<section class="r-body">
+  <div class="frame">
+    <div class="filters" role="group" aria-label="Filter research">
+      <button class="chip" data-filter="all" aria-pressed="true">All research</button>
+      <button class="chip" data-filter="ma" aria-pressed="false">M&amp;A</button><button class="chip" data-filter="dcm" aria-pressed="false">DCM</button><button class="chip" data-filter="markets" aria-pressed="false">Global Markets</button>
+    </div>
+
+    <div class="grid" id="reportGrid">
+      
+      
+      <a class="report" href="static/reports/blackrock-gip-eqt-aes.pdf" target="_blank" rel="noopener" data-division="ma">
+        <div class="stage"><img src="static/v2/covers/blackrock-gip-eqt-aes.jpg" alt="" loading="lazy" /></div>
+        <div class="r-text">
+          <span class="tag">M&amp;A · Deal analysis</span>
+          <h3>Deconstructing the $33.4bn Take-Private: BlackRock GIP &amp; EQT Infrastructure VI Acquisition of AES Corporation</h3>
+          <span class="by">Saiee Katarkar · August 2026</span>
+          <p>Reverse engineering valuation, consortium mechanics, and the AI infrastructure thesis behind the largest US power-sector take-private on record.</p>
+          <span class="read">Read report</span>
+        </div>
+      </a>
+      
+      
+      <a class="report" href="static/reports/abb-rotork.pdf" target="_blank" rel="noopener" data-division="ma">
+        <div class="stage"><img src="static/v2/covers/abb-rotork.jpg" alt="" loading="lazy" /></div>
+        <div class="r-text">
+          <span class="tag">M&amp;A · Deal analysis</span>
+          <h3>$5.5B Rotork Play: Analyzing ABB's Mega-Acquisition</h3>
+          <span class="by">Lewis Redmond · August 2026</span>
+          <p>Strategic rationale, premium multiples, and financing feasibility behind ABB's largest-ever acquisition, expanding its Process Automation division.</p>
+          <span class="read">Read report</span>
+        </div>
+      </a>
+      
+      
+      <a class="report" href="static/reports/vantedge-nl-uk-yields-oct2026.pdf" target="_blank" rel="noopener" data-division="markets">
+        <div class="stage"><img src="static/v2/covers/vantedge-nl-uk-yields-oct2026.jpg" alt="" loading="lazy" /></div>
+        <div class="r-text">
+          <span class="tag">Global Markets · Newsletter</span>
+          <h3>An Investor's Gilt or Guilt? 30-Year Gilts Hit 6%</h3>
+          <span class="by">Vantedge Markets Division · October 2026</span>
+          <p>British 30-year gilt yields crossed 6% for the first time since March 1998. We examine the Bank of England's rate outlook, fiscal implications of Healey's October budget, and read-throughs across M&amp;A, ECM, DCM, Equity Research, and PE.</p>
+          <span class="read">Read report</span>
+        </div>
+      </a>
+      
+      
+      <a class="report" href="static/reports/vantedge-nl-us-yields-oct2026.pdf" target="_blank" rel="noopener" data-division="markets">
+        <div class="stage"><img src="static/v2/covers/vantedge-nl-us-yields-oct2026.jpg" alt="" loading="lazy" /></div>
+        <div class="r-text">
+          <span class="tag">Global Markets · Newsletter</span>
+          <h3>US Treasury Yields and Oil Prices Reach Correlation Highs Since Gulf War</h3>
+          <span class="by">Vantedge Markets Division · October 2026</span>
+          <p>The 65% correlation between WTI crude and the 10Y Treasury yield has rendered bond traders oil traders since July. We break down the macro drivers, Fed implications, and division-level read-throughs.</p>
+          <span class="read">Read report</span>
+        </div>
+      </a>
+      
+      
+      <a class="report" href="static/reports/pg-thorne.pdf" target="_blank" rel="noopener" data-division="ma">
+        <div class="stage"><img src="static/v2/covers/pg-thorne.jpg" alt="" loading="lazy" /></div>
+        <div class="r-text">
+          <span class="tag">M&amp;A · Deal analysis</span>
+          <h3>Deconstructing the $3.8bn P&amp;G Acquisition of Thorne Healthtech</h3>
+          <span class="by">Dheer Darshakkumar Sheth · August 2026</span>
+          <p>Evaluating P&amp;G's return to strategic ownership of a premium, practitioner-channel supplements brand after a three-year private-equity hold.</p>
+          <span class="read">Read report</span>
+        </div>
+      </a>
+      
+      
+      <a class="report" href="static/reports/vantedge-nl-constellation-google-oct2026.pdf" target="_blank" rel="noopener" data-division="markets">
+        <div class="stage"><img src="static/v2/covers/vantedge-nl-constellation-google-oct2026.jpg" alt="" loading="lazy" /></div>
+        <div class="r-text">
+          <span class="tag">Global Markets · Newsletter</span>
+          <h3>Constellation and Google: Is There A New Currency In Our Cluster?</h3>
+          <span class="by">Ari Ali · October 2026</span>
+          <p>Google's 3,590 MW power contracts with Constellation put electricity at the centre of the AI era. We examine the $4.3bn investment thesis, nuclear upgrade mechanics, and read-throughs across all divisions.</p>
+          <span class="read">Read report</span>
+        </div>
+      </a>
+      
+      
+      <a class="report" href="static/reports/vantedge-nl-gilt-yields-oct2026.pdf" target="_blank" rel="noopener" data-division="markets">
+        <div class="stage"><img src="static/v2/covers/vantedge-nl-gilt-yields-oct2026.jpg" alt="" loading="lazy" /></div>
+        <div class="r-text">
+          <span class="tag">Global Markets · Newsletter</span>
+          <h3>Rising Gilt Yields Attract Retail Investors Hunting For Tax-Friendly Assets</h3>
+          <span class="by">Varun Vats · October 2026</span>
+          <p>UK retail investors are flocking to short-dated gilts trading below par, exploiting tax-free capital gains as 30-year yields hit their highest since 1998. We examine the structural shift and division-level read-throughs.</p>
+          <span class="read">Read report</span>
+        </div>
+      </a>
+      
+      
+      <a class="report" href="static/reports/daniel-d2d-ma-oct2026.pdf" target="_blank" rel="noopener" data-division="ma">
+        <div class="stage"><img src="static/v2/covers/daniel-d2d-ma-oct2026.jpg" alt="" loading="lazy" /></div>
+        <div class="r-text">
+          <span class="tag">M&amp;A · Sector report</span>
+          <h3>The D2D Scramble: How Spectrum Scarcity &amp; Direct-to-Device Convergence Sparked a $39B M&amp;A Wave</h3>
+          <span class="by">Daniel Zile Bartkevich · October 2026</span>
+          <p>Spectrum scarcity and D2D convergence drove $39B in satellite telecom M&amp;A between August 2025 and 2026. This report evaluates strategic rationale, premium multiples, and financing feasibility across the sector.</p>
+          <span class="read">Read report</span>
+        </div>
+      </a>
+      
+      
+      <a class="report" href="static/reports/giovanni-dcm-credit-flow-oct2026.pdf" target="_blank" rel="noopener" data-division="dcm">
+        <div class="stage"><img src="static/v2/covers/giovanni-dcm-credit-flow-oct2026.jpg" alt="" loading="lazy" /></div>
+        <div class="r-text">
+          <span class="tag">DCM · Capital markets</span>
+          <h3>Who Will Buy the Debt? Investors Still Will, at Higher Yields and Shorter Tenors Than Borrowers Are Used To</h3>
+          <span class="by">Giovanni De Stasio · October 2026</span>
+          <p>The global bond sell-off and the new price of capital. DM sovereigns and USD credit markets, 1 Sep to 6 Oct 2026. The world does not lack borrowers; it may lack investors willing to fund them at yesterday's prices.</p>
+          <span class="read">Read report</span>
+        </div>
+      </a>
+      
+      
+      <a class="report" href="static/reports/juzef-abf-hovis-sep2026.pdf" target="_blank" rel="noopener" data-division="ma">
+        <div class="stage"><img src="static/v2/covers/juzef-abf-hovis-sep2026.jpg" alt="" loading="lazy" /></div>
+        <div class="r-text">
+          <span class="tag">M&amp;A · Deal analysis</span>
+          <h3>Deconstructing Associated British Foods plc's Acquisition of Hovis Group Limited</h3>
+          <span class="by">Juzef Butt · September 2026</span>
+          <p>ABF agreed to acquire Hovis Group from Endless LLP in a strategic consolidation of the UK bakery sector. This report evaluates the strategic rationale, estimated deal value, and financing feasibility of the transaction.</p>
+          <span class="read">Read report</span>
+        </div>
+      </a>
+      
+      
+      <a class="report" href="static/reports/alberto-robot-earn-keep-oct2026.pdf" target="_blank" rel="noopener" data-division="markets">
+        <div class="stage"><img src="static/v2/covers/alberto-robot-earn-keep-oct2026.jpg" alt="" loading="lazy" /></div>
+        <div class="r-text">
+          <span class="tag">Global Markets · Newsletter</span>
+          <h3>The Robot Has to Earn Its Keep</h3>
+          <span class="by">Alberto Borgia · October 2026</span>
+          <p>Physical AI now has a public-market price. What Unitree's listing, the capital flowing into humanoids and Europe's two big bets tell investors about valuations that still have to be earned.</p>
+          <span class="read">Read report</span>
+        </div>
+      </a>
+      
+      
+      <a class="report" href="static/reports/vantedge-markets-physical-ai-oct2026.pdf" target="_blank" rel="noopener" data-division="markets">
+        <div class="stage"><img src="static/v2/covers/vantedge-markets-physical-ai-oct2026.jpg" alt="" loading="lazy" /></div>
+        <div class="r-text">
+          <span class="tag">Global Markets · Newsletter</span>
+          <h3>Robots now have a price. Next comes revenue</h3>
+          <span class="by">Alberto Borgia · October 2026</span>
+          <p>Unitree's Shanghai listing showed how much investors will pay for robots and how fast they reprice them. Europe's bets now need delivery data, not demos.</p>
+          <span class="read">Read report</span>
+        </div>
+      </a>
+      
+      
+      <a class="report" href="static/reports/luca-private-money-public-debt-oct2026.pdf" target="_blank" rel="noopener" data-division="markets">
+        <div class="stage"><img src="static/v2/covers/luca-private-money-public-debt-oct2026.jpg" alt="" loading="lazy" /></div>
+        <div class="r-text">
+          <span class="tag">Global Markets · Newsletter</span>
+          <h3>Private Money, Public Debt</h3>
+          <span class="by">Luca Rocci · October 2026</span>
+          <p>How stablecoins outgrew the crypto label and became a Treasury market, financial stability and monetary sovereignty story.</p>
+          <span class="read">Read report</span>
+        </div>
+      </a>
+      
+      
+      <a class="report" href="static/reports/vantedge-markets-schneider-ptc-oct2026.pdf" target="_blank" rel="noopener" data-division="markets">
+        <div class="stage"><img src="static/v2/covers/vantedge-markets-schneider-ptc-oct2026.jpg" alt="" loading="lazy" /></div>
+        <div class="r-text">
+          <span class="tag">Global Markets · Newsletter</span>
+          <h3>Investors balk at Schneider's PTC bid</h3>
+          <span class="by">Vincenzo Ciccolella · October 2026</span>
+          <p>Schneider Electric's $22.6bn deal for US software group PTC is its largest ever, but its shares fell almost 10% on the price and the debt.</p>
+          <span class="read">Read report</span>
+        </div>
+      </a>
+      
+      
+      <a class="report" href="static/reports/ravi-markets-weekly-brief-oct2026.pdf" target="_blank" rel="noopener" data-division="markets">
+        <div class="stage"><img src="static/v2/covers/ravi-markets-weekly-brief-oct2026.jpg" alt="" loading="lazy" /></div>
+        <div class="r-text">
+          <span class="tag">Global Markets · Newsletter</span>
+          <h3>Soaring chip prices drive China's record export surge</h3>
+          <span class="by">Ravi Modhvadia · October 2026</span>
+          <p>China's exports jumped 36.3% in September, but soaring chip prices and EU trade barriers raise questions about how long the boom can last.</p>
+          <span class="read">Read report</span>
+        </div>
+      </a>
+      
+      
+      <a class="report" href="static/reports/varun-kospi-markets-oct2026.pdf" target="_blank" rel="noopener" data-division="markets">
+        <div class="stage"><img src="static/v2/covers/varun-kospi-markets-oct2026.jpg" alt="" loading="lazy" /></div>
+        <div class="r-text">
+          <span class="tag">Global Markets · Newsletter</span>
+          <h3>Kospi Has Worst Week Since 2008 Plunging 14%</h3>
+          <span class="by">Varun Vats · October 2026</span>
+          <p>Korea's chipmaker-heavy index was the week's biggest move as AI debt fears spread, while London's FTSE 100 gained 3.1% on defensive buying.</p>
+          <span class="read">Read report</span>
+        </div>
+      </a>
+      
+      
+      <a class="report" href="static/reports/kevin-3m10y-yield-spread-oct2026.pdf" target="_blank" rel="noopener" data-division="markets">
+        <div class="stage"><img src="static/v2/covers/kevin-3m10y-yield-spread-oct2026.jpg" alt="" loading="lazy" /></div>
+        <div class="r-text">
+          <span class="tag">Global Markets · Newsletter</span>
+          <h3>Measuring the Economy: Why the 3M10Y Yield Spread Is One of the Fed's Most Watched Graphs</h3>
+          <span class="by">Kevin Ju · October 2026</span>
+          <p>The 3M10Y spread is the Federal Reserve Bank of New York's recession forecasting tool of choice. This report explains what it measures, why the 2022-24 inversion did not trigger a recession, and what the current 0.78% spread signals.</p>
+          <span class="read">Read report</span>
+        </div>
+      </a>
+      
+      
+      <a class="report" href="static/reports/varun-kospi-two-stocks-oct2026.pdf" target="_blank" rel="noopener" data-division="markets">
+        <div class="stage"><img src="static/v2/covers/varun-kospi-two-stocks-oct2026.jpg" alt="" loading="lazy" /></div>
+        <div class="r-text">
+          <span class="tag">Global Markets · Newsletter</span>
+          <h3>Two Stocks Drive KOSPI's Wild Year</h3>
+          <span class="by">Varun Vats · October 2026</span>
+          <p>June's peak, July's whiplash and October's drop all trace back to Samsung and SK Hynix. KOSPI behaves like a bet on AI memory chips, not on Korea as a whole.</p>
+          <span class="read">Read report</span>
+        </div>
+      </a>
+      
+      
+      <a class="report" href="static/reports/ilian-schneider-ptc-ma-oct2026.pdf" target="_blank" rel="noopener" data-division="ma">
+        <div class="stage"><img src="static/v2/covers/ilian-schneider-ptc-ma-oct2026.jpg" alt="" loading="lazy" /></div>
+        <div class="r-text">
+          <span class="tag">M&amp;A · Deal analysis</span>
+          <h3>Why Schneider's US$23.7bn Bid for PTC Pays a Full Price</h3>
+          <span class="by">Ilian Rouibi · October 2026</span>
+          <p>An evaluation of the premium paid, the realism of the synergies and the financing capacity behind Schneider Electric's largest-ever acquisition, as of 21 October 2026.</p>
+          <span class="read">Read report</span>
+        </div>
+      </a>
+      
+      
+      <a class="report" href="static/reports/vincenzo-varonis-proofpoint-oct2026.pdf" target="_blank" rel="noopener" data-division="markets">
+        <div class="stage"><img src="static/v2/covers/vincenzo-varonis-proofpoint-oct2026.jpg" alt="" loading="lazy" /></div>
+        <div class="r-text">
+          <span class="tag">Global Markets · Newsletter</span>
+          <h3>Is $49.75 a fair price for Varonis?</h3>
+          <span class="by">Vincenzo Ciccolella · October 2026</span>
+          <p>Proofpoint's $6.3bn cash offer looks rich against June's share price and thin against the 15 Oct close. Which yardstick counts decides whether $49.75 is a full price.</p>
+          <span class="read">Read report</span>
+        </div>
+      </a>
+      
+      
+      <a class="report" href="static/reports/ravi-coreweave-bonds-oct2026.pdf" target="_blank" rel="noopener" data-division="markets">
+        <div class="stage"><img src="static/v2/covers/ravi-coreweave-bonds-oct2026.jpg" alt="" loading="lazy" /></div>
+        <div class="r-text">
+          <span class="tag">Global Markets · Newsletter</span>
+          <h3>CoreWeave's bond yields test AI's funding model</h3>
+          <span class="by">Ravi Modhvadia · October 2026</span>
+          <p>Investors now demand a much higher return to hold CoreWeave's debt, exposing the financing pressures behind the AI data centre build-out.</p>
+          <span class="read">Read report</span>
+        </div>
+      </a>
+      
+      
+      <a class="report" href="static/reports/manav-lufthansa-asset-sale-oct2026.pdf" target="_blank" rel="noopener" data-division="markets">
+        <div class="stage"><img src="static/v2/covers/manav-lufthansa-asset-sale-oct2026.jpg" alt="" loading="lazy" /></div>
+        <div class="r-text">
+          <span class="tag">Global Markets · Newsletter</span>
+          <h3>Lufthansa weighs €1bn asset sale amid rising costs and expansion plans</h3>
+          <span class="by">Manav Mashru · October 2026</span>
+          <p>As rising costs squeeze airline profit margins, Europe's flag carriers are rethinking what they own and how they grow to stay competitive against low-cost rivals.</p>
+          <span class="read">Read report</span>
+        </div>
+      </a>
+      
+      
+      <a class="report" href="static/reports/ravi-vmo2-job-cuts-oct2026.pdf" target="_blank" rel="noopener" data-division="markets">
+        <div class="stage"><img src="static/v2/covers/ravi-vmo2-job-cuts-oct2026.jpg" alt="" loading="lazy" /></div>
+        <div class="r-text">
+          <span class="tag">Global Markets · Newsletter</span>
+          <h3>VMO2 job cuts loom as debt pressure builds</h3>
+          <span class="by">Ravi Modhvadia · October 2026</span>
+          <p>Virgin Media O2's reported workforce cuts follow weaker fixed-line revenue and attempts to reduce spending, with up to 4,000 jobs at risk.</p>
+          <span class="read">Read report</span>
+        </div>
+      </a>
+      
+      
+      <a class="report" href="static/reports/varun-lula-brazil-nov2026.pdf" target="_blank" rel="noopener" data-division="markets">
+        <div class="stage"><img src="static/v2/covers/varun-lula-brazil-nov2026.jpg" alt="" loading="lazy" /></div>
+        <div class="r-text">
+          <span class="tag">Global Markets · Newsletter</span>
+          <h3>Lula's Surprise Win in Brazil</h3>
+          <span class="by">Varun Vats · November 2026</span>
+          <p>Brazil's markets priced a Bolsonaro win for three weeks. Lula's runoff victory unwound the bet and pushed borrowing costs to a decade high.</p>
+          <span class="read">Read report</span>
+        </div>
+      </a>
+      
+      
+      <a class="report" href="static/reports/er-lululemon-initiation-oct2026.pdf" target="_blank" rel="noopener" data-division="equity">
+        <div class="stage"><img src="static/v2/covers/er-lululemon-initiation-oct2026.jpg" alt="" loading="lazy" /></div>
+        <div class="r-text">
+          <span class="tag">Equity Research · Deep dive</span>
+          <h3>Lululemon Athletica Inc. — Initiation of Coverage</h3>
+          <span class="by">Vantedge Equity Research · October 2026</span>
+          <p>BUY, US$155 target price (+59% upside). Lululemon's brand, international expansion runway and margin recovery make it a compelling re-entry at current levels.</p>
+          <span class="read">Read report</span>
+        </div>
+      </a>
+      
+    </div>
+
+    <div class="more-wrap">
+      <span class="count" id="reportCount" aria-live="polite">Showing 9 of 25 reports</span>
+      <button class="show-more" id="showMore">Show more</button>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="frame">
+    <div class="f-top">
+      <div class="f-brand">
+        <a class="lockup" href="index.html#top"><img src="static/v2/logo-mark-cream.png" alt="" /><span>Vantedge</span></a>
+        <div class="tag-line">Proven before<br>you're hired.</div>
+      </div>
+      <div class="f-cols">
+        <div><h4>Explore</h4><a href="research.html">Research</a><a href="index.html#partners">Partnerships</a></div>
+        <div><h4>Company</h4><a href="index.html#about">About</a><a href="index.html#advisor">Advisor</a></div>
+        <div><h4>Contact</h4><a href="mailto:contact@vantedgeorg.com">contact@vantedgeorg.com</a><a href="https://www.linkedin.com/company/vantedge-global" target="_blank" rel="noopener">LinkedIn</a><a href="portal.html">Portal</a></div>
+      </div>
+    </div>
+    <div class="legal">
+      <p>All content, analysis, and research published on this website are provided strictly for educational and informational purposes and do not constitute financial, investment, tax, or legal advice, nor an endorsement or solicitation to buy or sell any security. Readers should conduct independent due diligence and consult with a licensed professional before making any financial decisions.</p>
+      <p>&copy; 2026 Vantedge. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+
+
+<script>
+  (function(){
+    const PAGE = 9;
+    const cards = [...document.querySelectorAll('#reportGrid .report')];
+    const chips = [...document.querySelectorAll('.chip')];
+    const count = document.getElementById('reportCount');
+    const more = document.getElementById('showMore');
+    let filter = 'all', limit = PAGE;
+
+    function render(){
+      const match = cards.filter(c => filter === 'all' || c.dataset.division === filter);
+      cards.forEach(c => c.hidden = true);
+      match.slice(0, limit).forEach(c => c.hidden = false);
+      const shown = Math.min(limit, match.length);
+      count.textContent = `Showing ${shown} of ${match.length} report${match.length === 1 ? '' : 's'}`;
+      more.hidden = shown >= match.length;
+    }
+    chips.forEach(ch => ch.addEventListener('click', () => {
+      filter = ch.dataset.filter; limit = PAGE;
+      chips.forEach(c => c.setAttribute('aria-pressed', c === ch ? 'true' : 'false'));
+      render();
+    }));
+    more.addEventListener('click', () => { limit += PAGE; render(); });
+    render();
+  })();
+</script>
+
+<script>
+  // Close mobile menu after tapping a link
+  document.querySelectorAll('.links a').forEach(a => a.addEventListener('click', () => document.querySelector('.links').classList.remove('open')));
+</script>
+</body>
+</html>
