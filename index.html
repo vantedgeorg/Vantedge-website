@@ -8,7 +8,7 @@
 <link rel="icon" type="image/png" href="static/v2/logo-mark.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Inter:wght@500;600&family=Schibsted+Grotesk:wght@400;700&family=Tinos&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Inter:wght@500;600;700&family=Schibsted+Grotesk:wght@400;700&family=Tinos&display=swap" rel="stylesheet" />
 <style>
   /* Tokens from the Figma file (Vantedge Website) */
   :root{
@@ -18,7 +18,7 @@
     --body:'Geist', system-ui, -apple-system, sans-serif;
     --inter:'Inter', system-ui, sans-serif;
     --display:'Schibsted Grotesk', 'Inter', sans-serif;
-    --serif:'Tinos', 'Times New Roman', Times, serif;
+    --serif:'Times New Roman', Times, 'Tinos', serif;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
@@ -47,20 +47,23 @@
 
   /* ---------- Footer (8:163) ---------- */
   footer{background:var(--graphite)}
-  footer .frame{padding:88px 80px 48px;display:flex;flex-direction:column;gap:72px}
+  footer .frame{padding:40px 80px 22px;display:flex;flex-direction:column;gap:24px}
   .f-top{display:flex;justify-content:space-between;align-items:flex-start}
-  .f-brand{display:flex;flex-direction:column;gap:28px}
+  .f-brand{display:flex;flex-direction:column;gap:14px}
   .lockup{display:flex;align-items:center;gap:14px}
-  .lockup img{width:30px;height:30px}
-  .lockup span{font-family:var(--serif);font-size:26px;letter-spacing:2.86px;text-transform:uppercase;color:var(--cream)}
-  .f-brand .tag-line{font-family:var(--inter);font-weight:600;font-size:22px;line-height:1.2;letter-spacing:-.44px;color:var(--cream)}
-  .f-cols{display:flex;gap:96px;white-space:nowrap}
-  .f-cols div{display:flex;flex-direction:column;gap:16px}
-  .f-cols h4{font-weight:400;font-size:12px;letter-spacing:2.64px;text-transform:uppercase;color:var(--dark-label);line-height:normal}
-  .f-cols a{font-size:17px;color:var(--cream);line-height:normal}
+  .lockup img{width:20px;height:20px}
+  .lockup span{font-family:var(--serif);font-size:18px;letter-spacing:2px;text-transform:uppercase;color:var(--cream)}
+  .f-brand .tag-line{font-family:var(--display);font-weight:700;font-size:22px;line-height:1.15;letter-spacing:-.44px;color:var(--cream)}
+  .f-about{margin-top:0;display:flex;flex-direction:column;gap:2px;max-width:380px}
+  .f-title{font-size:13.5px;line-height:1.55;color:var(--dark-label)}
+  .f-desc{font-size:13.5px;line-height:1.55;color:var(--dark-label)}
+  .f-cols{display:flex;gap:56px;white-space:nowrap}
+  .f-cols div{display:flex;flex-direction:column;gap:6px}
+  .f-cols h4{font-weight:400;font-size:10px;letter-spacing:2.2px;text-transform:uppercase;color:var(--dark-label);line-height:normal}
+  .f-cols a{font-size:13.5px;color:var(--cream);line-height:normal}
   .f-cols a:hover{color:#fff}
-  .legal{border-top:1px solid var(--dark-border);padding-top:32px;display:flex;flex-direction:column;gap:14px;font-size:13px;color:var(--dark-label)}
-  .legal p:first-child{max-width:1000px;line-height:1.7}
+  .legal{border-top:1px solid var(--dark-border);padding-top:14px;display:flex;flex-direction:column;gap:4px;font-size:11px;color:var(--dark-label)}
+  .legal p:first-child{max-width:1100px;line-height:1.55}
 
 
   @media (max-width:900px){
@@ -69,10 +72,10 @@
     .links.open{display:flex}
     .links .gap{display:none}
     .menu-toggle{display:grid;place-items:center;width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,255,255,.6);background:rgba(251,250,246,.5);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
-    footer .frame{padding:64px 24px 40px;gap:48px}
-    .f-top{flex-direction:column;gap:48px}
+    footer .frame{padding:28px 24px 20px;gap:20px}
+    .f-top{flex-direction:column;gap:20px}
     .f-brand .tag-line{font-size:20px}
-    .f-cols{flex-wrap:wrap;gap:40px}
+    .f-cols{flex-wrap:wrap;gap:20px 36px}
   }
 </style>
 
@@ -198,6 +201,10 @@
   /* ---------- Partners (53:51) ---------- */
   .partners{background:var(--stone-50)}
   .partners .frame{padding:110px 80px}
+  /* Partner universities shown at 70% scale, like Get in touch */
+  @media (min-width:901px){ .partners .frame{zoom:.7;max-width:1440px} }
+  /* Leadership and About shown at 70% scale too (photo backgrounds stay full size) */
+  @media (min-width:901px){ .about .frame{zoom:.7;max-width:1440px} .advisors .frame{zoom:.85;max-width:1440px} }
   .p-head{display:flex;flex-direction:column;gap:16px}
   .p-head .kick{font-size:13px;letter-spacing:3.12px;text-transform:uppercase;color:var(--stone-750);line-height:normal}
   .p-head h2{font-family:var(--inter);font-weight:600;font-size:52px;line-height:1.1;letter-spacing:-1.56px}
@@ -221,7 +228,12 @@
 
   /* ---------- Contact (297:197) ---------- */
   .contact{background:#f5f3ee}
-  .contact .frame{min-height:1024px;padding:100px 80px 101px;display:flex;gap:80px;align-items:flex-start}
+  .contact .frame{padding:100px 80px 101px;display:flex;gap:80px;align-items:flex-start}
+  /* Whole Get in touch section (incl. the Tally form) shown at 70% scale; card + details centred as one block */
+  @media (min-width:901px){
+    .contact .frame{zoom:.7;max-width:2057px;justify-content:center}
+    .contact .details{flex:0 1 560px}
+  }
   .form-card{width:600px;flex:none;background:#fbfaf6;border-radius:24px;padding:48px;display:flex;flex-direction:column;gap:22px;filter:drop-shadow(0 12px 20px rgba(13,13,26,.05))}
   .form-card h2{font-family:var(--inter);font-weight:600;font-size:44px;line-height:1.1;letter-spacing:-1.32px}
   .form-card .intro{margin-top:12px;font-size:17px;line-height:1.55;color:#5e5a52}
@@ -600,6 +612,10 @@
       <div class="f-brand">
         <a class="lockup" href="#top"><img src="static/v2/logo-mark-cream.png" alt="" /><span>Vantedge</span></a>
         <div class="tag-line">Proven before<br>you're hired.</div>
+        <div class="f-about">
+          <p class="f-title">Building the talent infrastructure for finance.</p>
+          <p class="f-desc">Vantedge is building a new way for finance firms to identify and evaluate emerging talent.</p>
+        </div>
       </div>
       <div class="f-cols">
         <div><h4>Explore</h4><a href="research.html">Research</a><a href="#partners">Partnerships</a></div>
