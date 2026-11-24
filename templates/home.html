@@ -276,6 +276,22 @@
     .pop-head{flex-direction:column;align-items:flex-start;gap:20px}
     .pop-close{top:24px;right:24px}
   }
+  /* Phone fixes */
+  @media (max-width:900px){
+    .chapter{flex:none}
+    .wwd .fr{background:linear-gradient(90deg,rgba(245,243,238,.55) 0%,rgba(245,243,238,.9) 35%,rgba(245,243,238,.95) 100%)}
+    .wwd .wash{background:rgba(27,25,22,.08)}
+    .greg .bio{text-align:left}
+    .adv .name{font-size:22px}
+    .adv .role{font-size:13px}
+    .adv .bio{font-size:14px;text-align:left}
+    .adv .more{font-size:14px;gap:10px}
+    .adv .more img{width:16px;height:16px}
+    .greg .kick{font-size:11px}
+    .greg .name{font-size:30px}
+    .greg .role{font-size:14px}
+    .about .vision br{display:none}
+  }
   @media (prefers-reduced-motion:reduce){ .track{animation:none} html{scroll-behavior:auto} }
 </style>
 {% endblock %}
