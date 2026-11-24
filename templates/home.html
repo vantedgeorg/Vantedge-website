@@ -1,0 +1,610 @@
+{% extends 'layout.html' %}
+{% block title %}Vantedge — Building the talent infrastructure for finance{% endblock %}
+{% block styles %}
+<style>
+  /* ---------- Hero (19:110) ---------- */
+  .hero{position:relative;background:var(--stone-50);overflow:hidden}
+  .hero .frame{position:static;height:1024px;display:flex}
+  /* Video fills the whole first screen; fades keep the copy readable and blend into the next section */
+  .hero-photo{position:absolute;inset:0;overflow:hidden;background:var(--stone-50)}
+  .hero-photo video{display:block;width:100%;height:100%;object-fit:cover;object-position:center 40%;filter:grayscale(1) brightness(1.05)}
+  .hero-photo .wash{position:absolute;inset:0;background:linear-gradient(127.3deg,rgba(27,25,22,0) 30%,rgba(27,25,22,.18) 60%,rgba(27,25,22,.45) 100%)}
+  .hero-photo .fl{position:absolute;inset:0;background:linear-gradient(90deg,#f5f3ee 0%,rgba(245,243,238,.96) 22%,rgba(245,243,238,.82) 36%,rgba(245,243,238,.5) 50%,rgba(245,243,238,.18) 64%,rgba(245,243,238,0) 78%)}
+  .hero-photo .fb{position:absolute;left:0;right:0;bottom:0;height:300px;background:linear-gradient(180deg,rgba(245,243,238,0) 0%,rgba(245,243,238,.6) 45%,#f5f3ee 85%,#f5f3ee 100%)}
+  .hero-photo .ft{position:absolute;left:0;right:0;top:0;height:220px;background:linear-gradient(180deg,rgba(245,243,238,.75) 0%,rgba(245,243,238,.3) 50%,rgba(245,243,238,0) 100%)}
+  .hero-copy{position:relative;flex:1;display:flex;flex-direction:column;justify-content:center;padding:117px 600px 80px 80px}
+  .hero h1{font-family:var(--display);font-weight:700;font-size:64px;line-height:1.06;letter-spacing:-1.92px;white-space:nowrap}
+  .hero .sub{margin-top:28px;width:560px;font-size:20px;line-height:1.55;color:var(--stone-750)}
+  .ctas{margin-top:44px;display:flex;align-items:center;gap:32px}
+  .pill{display:inline-flex;align-items:center;gap:10px;background:var(--graphite);color:var(--cream);font-size:16px;padding:14px 28px;border-radius:999px;line-height:normal}
+  .ulink{display:inline-flex;align-items:center;gap:12px;font-weight:500;font-size:16px;color:var(--ink);padding-bottom:8px;border-bottom:1px solid var(--stone-400);line-height:normal}
+  .ulink:hover{border-color:var(--ink)}
+  .stats{margin-top:72px;display:flex;align-items:center}
+  .stat{display:flex;flex-direction:column;gap:8px;padding:0 48px;white-space:nowrap}
+  .stat:first-child{padding-left:0}
+  .stat b{font-family:var(--display);font-weight:400;font-size:40px;letter-spacing:-.8px;line-height:normal}
+  .stat span{font-size:15px;color:var(--stone-700);line-height:normal}
+  .stat-div{width:1px;height:72px;background:var(--stone-400)}
+
+  /* ---------- Start here (148:200) ---------- */
+  .start{position:relative;background:var(--stone-50);overflow:hidden}
+  .start .frame{height:1024px}
+  .backdrop{position:absolute;inset:0;pointer-events:none}
+  .start .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .start .wash{position:absolute;inset:0;background:rgba(27,25,22,.06)}
+  .start .fl{position:absolute;top:0;left:0;width:calc(820px + max(0px, (100% - 1440px) / 2));height:100%;background:linear-gradient(90deg,rgba(245,243,238,.96) 0%,rgba(245,243,238,.82) 50%,rgba(245,243,238,0) 100%)}
+  .start .ft{position:absolute;top:0;left:0;right:0;height:180px;background:linear-gradient(180deg,#f5f3ee 0%,rgba(245,243,238,.9) 12%,rgba(245,243,238,0) 100%)}
+  .start .fb{position:absolute;bottom:0;left:0;right:0;height:200px;background:linear-gradient(180deg,rgba(245,243,238,0),#f5f3ee)}
+  .start-copy{position:absolute;left:80px;top:292px}
+  .start h2{font-family:var(--display);font-weight:700;font-size:60px;line-height:1.04;letter-spacing:-1.8px;white-space:nowrap}
+  .start-copy p{margin-top:28px;width:380px;font-size:17px;line-height:1.55}
+  .path{position:absolute;top:292px;width:392px;height:440px;border-radius:20px;border:1px solid #fbfaf6;background:var(--paper);overflow:hidden;box-shadow:0 24px 48px rgba(27,25,22,.1);transition:transform .3s ease,box-shadow .3s ease}
+  .path:hover{transform:translateY(-4px);box-shadow:0 30px 56px rgba(27,25,22,.14)}
+  .path.emp{left:560px}.path.stu{left:968px}
+  .path .photo{position:absolute;top:-1px;left:90px;width:300px;height:440px;object-fit:cover}
+  .path .pfade{position:absolute;inset:-1px;background:linear-gradient(90deg,#fbfaf6 0%,#fbfaf6 42%,rgba(251,250,246,.7) 62%,rgba(251,250,246,.2) 82%,rgba(251,250,246,.05) 100%)}
+  .path .content{position:absolute;inset:-1px;display:flex;flex-direction:column;justify-content:space-between;padding:40px 36px 36px}
+  .path .txt{display:flex;flex-direction:column;gap:16px}
+  .eyebrow{font-weight:500;font-size:12px;letter-spacing:2.64px;text-transform:uppercase;color:var(--stone-750);line-height:normal}
+  .path h3{font-family:var(--inter);font-weight:600;font-size:28px;line-height:1.14;letter-spacing:-.56px;width:250px}
+  .path .txt p{width:230px;font-size:15px;line-height:1.55}
+  .path .cta{display:flex;align-items:center;gap:14px;font-family:var(--inter);font-weight:500;font-size:15px;line-height:normal}
+  .circle{width:44px;height:44px;border-radius:22px;display:grid;place-items:center;border:1px solid rgba(27,25,22,.55)}
+  .circle.dark{background:var(--graphite);border-color:var(--graphite)}
+  .circle img{width:16px;height:16px}
+
+  /* ---------- What we do (32:57) ---------- */
+  .wwd{position:relative;background:var(--stone-50);overflow:hidden}
+  .wwd .frame{height:1024px;display:flex}
+  .wwd .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .wwd .wash{position:absolute;inset:0;background:linear-gradient(90deg,rgba(27,25,22,.5) 0%,rgba(27,25,22,.15) 45%,rgba(27,25,22,0) 100%)}
+  .wwd .fr{position:absolute;top:0;bottom:0;right:0;width:calc(980px + max(0px, (100% - 1440px) / 2));background:linear-gradient(90deg,rgba(245,243,238,0) 0%,rgba(245,243,238,.4) 22%,rgba(245,243,238,.88) 50%,rgba(245,243,238,.95) 100%)}
+  .wwd .ft{position:absolute;top:0;left:0;right:0;height:220px;background:linear-gradient(180deg,#f5f3ee 0%,#f5f3ee 22%,rgba(245,243,238,.6) 55%,rgba(245,243,238,0) 100%)}
+  .wwd .fb{position:absolute;bottom:0;left:0;right:0;height:200px;background:linear-gradient(180deg,rgba(245,243,238,0),#f5f3ee)}
+  .wwd-copy{position:relative;flex:1;display:flex;flex-direction:column;justify-content:center;padding:110px 80px 110px 760px}
+  .label{display:flex;align-items:center;gap:16px}
+  .label span{font-weight:700;font-size:13px;letter-spacing:2.6px;text-transform:uppercase;color:var(--stone-700);line-height:normal}
+  .label i{width:56px;height:1px;background:var(--stone-400)}
+  .wwd h2{margin-top:28px;width:620px;font-family:var(--display);font-weight:700;font-size:52px;line-height:1.08;letter-spacing:-1.3px}
+  .wwd p{margin-top:24px;width:540px;font-size:19px;line-height:1.55;color:var(--stone-750)}
+  .wwd .ulink{margin-top:40px;align-self:flex-start}
+
+  /* ---------- University strip (3:130) ---------- */
+  .unis{background:var(--stone-50);padding:20px 0;display:flex;flex-direction:column;align-items:center;gap:6px}
+  .unis h4{font-weight:700;font-size:12px;letter-spacing:2.64px;text-transform:uppercase;color:var(--stone-700);line-height:normal}
+  .ticker{position:relative;width:100%;height:40px;overflow:hidden}
+  .track{position:absolute;top:4px;left:0;display:flex;align-items:center;gap:48px;width:max-content;animation:tick 40s linear infinite}
+  .track img{height:32px;object-fit:contain}
+  @keyframes tick{to{transform:translateX(calc(-50% - 24px))}}
+
+  /* ---------- Leadership (50:51) ---------- */
+  .advisors{background:var(--stone-50)}
+  .advisors .frame{height:1024px;padding:53px 80px;display:flex;justify-content:center}
+  .adv-content{width:1104px;display:flex;flex-direction:column;gap:38.041px}
+  .adv-content h2{font-family:var(--display);font-weight:700;font-size:35.324px;line-height:1.1;letter-spacing:-1.0597px}
+  .greg{display:flex;gap:38.041px;align-items:flex-start;width:100%}
+  .greg > img{width:300px;height:375px;border-radius:10.869px;flex:none}
+  .greg .profile{flex:1;height:375px;padding:28px 0;display:flex;flex-direction:column}
+  .greg .kick{font-size:8.152px;letter-spacing:1.9564px;text-transform:uppercase;color:var(--stone-750);line-height:normal}
+  .greg .name{margin-top:28px;font-size:27.172px;line-height:1.05;letter-spacing:-.8152px}
+  .greg .role{margin-top:6.793px;font-size:10.19px;color:var(--stone-750);line-height:normal}
+  .greg .bio{margin-top:auto;display:flex;flex-direction:column;gap:9.51px;font-size:14px;line-height:1.65;text-align:justify}
+  .adv-grid{display:flex;gap:27.172px;width:100%}
+  .adv{flex:1 0 0;min-width:0;height:408px;display:flex;flex-direction:column;gap:13.586px}
+  .adv > img{width:100%;height:259px;border-radius:10.869px;object-fit:cover;flex:none}
+  .adv .profile{flex:1;display:flex;flex-direction:column;gap:4.076px;min-height:0}
+  .adv .name{font-size:16.303px;line-height:1.05;letter-spacing:-.4891px}
+  .adv .role{font-size:9.51px;color:var(--stone-750);line-height:normal}
+  .adv .bio{margin-top:4.076px;font-size:9.171px;line-height:1.65;text-align:justify;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+  .adv .more{margin-top:auto;align-self:flex-start;display:inline-flex;align-items:center;gap:8.152px;font-weight:500;font-size:10.869px;padding-bottom:5.434px;border-bottom:.679px solid var(--stone-400);line-height:normal}
+  .adv .more img{width:12.227px;height:12.227px}
+  .greg,.adv[data-bio]{cursor:pointer}
+  .adv[data-bio]:hover .more,.greg:hover .name{color:var(--graphite)}
+
+  /* ---------- About intro (269:200) ---------- */
+  .about{position:relative;background:var(--stone-50);overflow:hidden}
+  .about .frame{height:1024px}
+  .about .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .about .fl{position:absolute;top:0;left:0;width:calc(820px + max(0px, (100% - 1440px) / 2));height:100%;background:linear-gradient(90deg,rgba(245,243,238,.92) 0%,rgba(245,243,238,.7) 45%,rgba(245,243,238,0) 100%)}
+  .about .ft{position:absolute;top:0;left:0;right:0;height:200px;background:linear-gradient(180deg,#f5f3ee 0%,rgba(245,243,238,.9) 12%,rgba(245,243,238,0) 100%)}
+  .about .fb{position:absolute;left:0;right:0;bottom:0;height:280px;background:linear-gradient(180deg,rgba(245,243,238,0),#f5f3ee)}
+  .about .kick{position:absolute;left:80px;top:190px;font-weight:600;font-size:13px;letter-spacing:3.12px;text-transform:uppercase;color:var(--stone-750);line-height:normal}
+  .about h2{position:absolute;left:76px;top:226px;font-family:var(--display);font-weight:700;font-size:64px;line-height:1.06;letter-spacing:-1.92px;white-space:nowrap}
+  .glass{position:absolute;top:580px;width:376px;height:250px;border-radius:14px;overflow:hidden;
+    background:rgba(201,199,195,.55);border:1px solid rgba(255,253,248,.7);-webkit-backdrop-filter:blur(22px);backdrop-filter:blur(22px);
+    box-shadow:0 16px 40px rgba(13,13,26,.08)}
+  .glass.g1{left:80px}.glass.g2{left:532px}.glass.g3{left:984px}
+  .glass .in{position:absolute;left:27px;top:29px;display:flex;flex-direction:column}
+  .glass .eyebrow{font-size:11px}
+  .glass h3{margin-top:16px;width:300px;font-weight:400;font-size:24px;line-height:1.18;letter-spacing:-.24px}
+  .glass p{margin-top:18px;width:210px;font-size:14px;line-height:1.55;color:rgba(12,14,30,.85)}
+  .about .vision{position:absolute;left:80px;top:904px;font-size:22px;line-height:1.35;letter-spacing:-.11px;white-space:nowrap}
+
+  /* ---------- Partners (53:51) ---------- */
+  .partners{background:var(--stone-50)}
+  .partners .frame{padding:110px 80px}
+  /* Partner universities shown at 70% scale, like Get in touch */
+  @media (min-width:901px){ .partners .frame{zoom:.7;max-width:1440px} }
+  /* Leadership and About shown at 70% scale too (photo backgrounds stay full size) */
+  @media (min-width:901px){ .about .frame{zoom:.7;max-width:1440px} .advisors .frame{zoom:.85;max-width:1440px} }
+  .p-head{display:flex;flex-direction:column;gap:16px}
+  .p-head .kick{font-size:13px;letter-spacing:3.12px;text-transform:uppercase;color:var(--stone-750);line-height:normal}
+  .p-head h2{font-family:var(--inter);font-weight:600;font-size:52px;line-height:1.1;letter-spacing:-1.56px}
+  .p-head p{width:820px;font-size:20px;line-height:1.55;color:var(--stone-750)}
+  .chapters{margin-top:48px;display:flex;gap:32px}
+  .chapter{flex:1 0 0;min-width:0;background:var(--paper);border-radius:12px;overflow:hidden;box-shadow:0 10px 28px -4px rgba(12,14,30,.06)}
+  .campus{position:relative;height:300px;overflow:hidden}
+  .campus img{width:100%;height:100%;object-fit:cover}
+  .tag{position:absolute;top:24px;right:24px;background:var(--stone-750);color:var(--paper);font-size:12px;letter-spacing:2.4px;text-transform:uppercase;padding:9px 16px;line-height:normal}
+  .ch-body{height:410px;padding:36px 40px 32px;display:flex;flex-direction:column;gap:24px}
+  .identity{display:flex;align-items:center;gap:16px}
+  .tile{width:60px;height:60px;border-radius:8px;border:1px solid var(--stone-300);background:var(--paper);display:grid;place-items:center;flex:none}
+  .tile img{width:46px;height:46px;object-fit:cover}
+  .identity h3{font-family:var(--inter);font-weight:600;font-size:24px;letter-spacing:-.36px;line-height:normal}
+  .identity span{display:block;margin-top:2px;font-size:16px;letter-spacing:.48px;color:var(--stone-700);line-height:normal}
+  .ch-body > p{font-size:17px;line-height:1.65}
+  .join{display:flex;justify-content:center;width:100%;padding:18px 0;border-radius:999px;background:var(--stone-750);color:var(--paper);font-family:var(--inter);font-weight:500;font-size:14px;letter-spacing:2.8px;text-transform:uppercase;line-height:normal;transition:background .2s}
+  .join:hover{background:var(--graphite)}
+  .ch-body .note{font-size:14px;color:var(--stone-700);text-align:center;line-height:normal}
+  .ch-body .note b{font-weight:400;color:var(--ink)}
+
+  /* ---------- Contact (297:197) ---------- */
+  .contact{background:#f5f3ee}
+  .contact .frame{padding:100px 80px 101px;display:flex;gap:80px;align-items:flex-start}
+  /* Whole Get in touch section (incl. the Tally form) shown at 70% scale; card + details centred as one block */
+  @media (min-width:901px){
+    .contact .frame{zoom:.7;max-width:2057px;justify-content:center}
+    .contact .details{flex:0 1 560px}
+  }
+  .form-card{width:600px;flex:none;background:#fbfaf6;border-radius:24px;padding:48px;display:flex;flex-direction:column;gap:22px;filter:drop-shadow(0 12px 20px rgba(13,13,26,.05))}
+  .form-card h2{font-family:var(--inter);font-weight:600;font-size:44px;line-height:1.1;letter-spacing:-1.32px}
+  .form-card .intro{margin-top:12px;font-size:17px;line-height:1.55;color:#5e5a52}
+  .form-card .sp{height:6px}
+  .field{display:flex;flex-direction:column;gap:8px}
+  .field label,.c-eyebrow{font-weight:500;font-size:12px;letter-spacing:2.16px;text-transform:uppercase;color:#5e5a52;line-height:normal}
+  .field input,.field select,.field textarea{width:100%;height:52px;padding:0 18px;border-radius:12px;border:1px solid var(--stone-400);background:#f5f3ee;font:inherit;font-size:15px;color:var(--ink);outline:none;transition:border-color .2s}
+  .field select{border-color:#d9d5cc;appearance:none;-webkit-appearance:none;cursor:pointer;padding-right:46px;background:#f5f3ee url("{{ S }}chevron.svg") no-repeat right 18px center/14px 14px}
+  .field select:invalid{color:#8c8a82}
+  .field select option{color:var(--ink)}
+  .field textarea{height:130px;padding:15px 18px;resize:vertical;line-height:normal}
+  .field input::placeholder,.field textarea::placeholder{color:#8c8a82}
+  .field input:focus,.field select:focus,.field textarea:focus{border-color:var(--ink)}
+  .field.err input,.field.err select,.field.err textarea{border-color:#a3402e}
+  .consent{display:flex;gap:12px;align-items:flex-start;font-size:14px;line-height:1.5;color:#5e5a52;cursor:pointer}
+  .consent input{appearance:none;-webkit-appearance:none;width:20px;height:20px;flex:none;border:1.5px solid #5e5a52;border-radius:5px;display:grid;place-items:center;cursor:pointer}
+  .consent input:checked{background:var(--ink);border-color:var(--ink)}
+  .consent input:checked::after{content:"";width:10px;height:6px;border:solid #fbfaf6;border-width:0 0 1.6px 1.6px;transform:translateY(-1px) rotate(-45deg)}
+  .consent.err input{border-color:#a3402e}
+  .send{align-self:flex-start;display:inline-flex;align-items:center;gap:10px;background:#0c0e1e;color:#fbfaf6;font-weight:500;font-size:15px;padding:16px 32px;border-radius:999px;line-height:normal}
+  .send img{width:16px;height:16px}
+  .form-msg{font-size:14px;color:#5e5a52}
+  .form-card .tally{display:block;width:100%;min-height:420px;border:0;margin-top:6px}
+  .details{flex:1;min-width:0;padding-top:40px;display:flex;flex-direction:column;gap:28px}
+  .mail{display:flex;align-items:center;gap:20px}
+  .mail .ic{width:48px;height:48px;border-radius:999px;background:#e8e3d9;display:grid;place-items:center;flex:none}
+  .mail .ic img{width:20px;height:20px}
+  .mail a{display:block;margin-top:6px;font-weight:500;font-size:22px;color:#0c0e1e;line-height:normal}
+  .mail a:hover{text-decoration:underline}
+  .topics{display:flex;gap:20px}
+  .box{background:#fbfaf6;border-radius:18px;padding:28px;display:flex;flex-direction:column;gap:10px}
+  .topics .box{flex:1 0 0;min-width:0}
+  .box h3{font-family:var(--inter);font-weight:600;font-size:22px;line-height:1.25;letter-spacing:-.22px}
+  .box p{font-size:14px;line-height:1.55;color:#5e5a52}
+  .follow{display:flex;align-items:center;gap:20px}
+  .follow .c-eyebrow{font-size:13px;letter-spacing:2.34px}
+  .li{display:inline-flex;align-items:center;gap:10px;padding:13px 22px;border-radius:999px;border:1px solid var(--stone-400);font-weight:500;font-size:13px;letter-spacing:2.34px;text-transform:uppercase;line-height:normal;transition:border-color .2s}
+  .li:hover{border-color:var(--ink)}
+  .li img{width:18px;height:18px}
+
+  /* ---------- Bio popups (206:200 etc.) ---------- */
+  .modal{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;padding:24px;background:rgba(13,13,26,.45);opacity:0;transition:opacity .2s ease}
+  .modal.open{display:flex}
+  .modal.show{opacity:1}
+  .popup{position:relative;width:760px;max-width:100%;max-height:calc(100vh - 48px);overflow:auto;background:var(--stone-50);border-radius:20px;padding:56px;display:flex;flex-direction:column;gap:28px;box-shadow:0 24px 64px rgba(13,13,26,.18);transform:translateY(8px);transition:transform .2s ease}
+  .modal.show .popup{transform:none}
+  .pop-head{display:flex;align-items:center;gap:28px}
+  .pop-head img{width:112px;height:112px;border-radius:50%;flex:none}
+  .pop-id{flex:1;min-width:0;padding-right:24px;display:flex;flex-direction:column;gap:8px}
+  .pop-id .k{font-size:12px;letter-spacing:2.88px;text-transform:uppercase;color:var(--stone-750);line-height:normal}
+  .pop-id .n{font-size:36px;line-height:1.05;letter-spacing:-1.08px}
+  .pop-id .r{font-size:14px;color:var(--stone-750);line-height:normal}
+  .pop-close{position:absolute;top:40px;right:40px;width:20px;height:20px}
+  .pop-close img{width:20px;height:20px}
+  .popup hr{border:0;height:1px;background:var(--stone-400)}
+  .pop-bio{display:flex;flex-direction:column;gap:16px;font-size:16px;line-height:1.65}
+
+  /* ---------- Responsive (Figma is desktop 1440; these keep it usable below that) ---------- */
+  @media (max-width:1439px){
+    .start .frame,.about .frame{height:auto;min-height:1024px;display:flex;flex-direction:column;justify-content:center;padding:140px 80px 100px}
+    .start-copy,.about .kick,.about h2,.about .vision{position:static}
+    .start .frame{flex-direction:row;flex-wrap:wrap;align-items:center;gap:32px}
+    .start-copy{flex:1 1 380px}
+    .path{position:relative;top:auto;left:auto!important;flex:0 0 392px}
+    .about .frame{gap:0}
+    .about h2{margin-top:20px}
+    .about .cards{margin-top:60px;display:flex;gap:32px;flex-wrap:wrap}
+    .glass{position:relative;top:auto;left:auto!important;flex:1 1 300px;max-width:376px}
+    .about .vision{margin-top:60px;white-space:normal}
+    .hero-copy{padding-right:80px}
+    .wwd-copy{padding-left:52%}
+    .wwd h2,.wwd p{width:auto;max-width:620px}
+  }
+  @media (max-width:1180px){
+    .advisors .frame,.contact .frame{height:auto}
+    .adv-content{width:100%}
+    .contact .frame{flex-direction:column}
+    .form-card{width:100%;max-width:600px}
+    .details{padding-top:0;width:100%}
+  }
+  @media (max-width:900px){
+    .hero .frame{height:auto;flex-direction:column}
+    .hero-photo .fl{background:linear-gradient(90deg,rgba(245,243,238,.94) 0%,rgba(245,243,238,.85) 60%,rgba(245,243,238,.6) 100%)}
+    .hero-copy{padding:120px 24px 40px}
+    .hero h1,.start h2,.about h2{white-space:normal;font-size:40px;letter-spacing:-1.2px}
+    .hero .sub,.start-copy p{width:auto;font-size:17px}
+    .ctas{flex-wrap:wrap;gap:20px}
+    .stats{margin-top:48px}
+    .stat{padding:0 20px}.stat b{font-size:28px}.stat span{font-size:13px}
+    .start .frame,.about .frame{padding:100px 24px 72px;min-height:0}
+    .path{flex:1 1 100%;width:100%;max-width:392px}
+    .wwd .frame{height:auto;min-height:760px}
+    .wwd .fr{width:100%}
+    .wwd-copy{padding:120px 24px}
+    .wwd h2{font-size:36px;letter-spacing:-.9px}
+    .wwd p{font-size:17px}
+    .advisors .frame{padding:72px 24px}
+    .adv-content h2{font-size:30px}
+    .greg{flex-direction:column}
+    .greg > img{width:100%;max-width:300px;height:auto;aspect-ratio:300/375}
+    .greg .profile{height:auto;padding:0}
+    .greg .bio{margin-top:24px}
+    .adv-grid{flex-direction:column;gap:40px}
+    .adv{height:auto}
+    .adv .more{margin-top:12px}
+    .glass{max-width:none}
+    .about .vision{font-size:19px}
+    .partners .frame{padding:72px 24px}
+    .p-head h2{font-size:36px}
+    .p-head p{width:auto;font-size:17px}
+    .chapters{flex-direction:column}
+    .ch-body{height:auto;padding:28px 24px}
+    .contact .frame{padding:72px 24px}
+    .form-card{padding:32px 24px}
+    .form-card h2{font-size:34px}
+    .topics{flex-direction:column}
+    .popup{padding:40px 24px}
+    .pop-head{flex-direction:column;align-items:flex-start;gap:20px}
+    .pop-close{top:24px;right:24px}
+  }
+  @media (prefers-reduced-motion:reduce){ .track{animation:none} html{scroll-behavior:auto} }
+</style>
+{% endblock %}
+{% block content %}
+{% set ink_arrow %}<img class="arrow18" src="{{ S }}arrow-ink.svg" alt="" />{% endset %}
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <div class="frame">
+    <div class="hero-photo" aria-hidden="true">
+      <video src="{{ url_for('static', filename='hero.mp4') }}" poster="{{ S }}hero.png" autoplay muted loop playsinline preload="auto"></video>
+      <div class="wash"></div><div class="fl"></div><div class="fb"></div><div class="ft"></div>
+    </div>
+    <div class="hero-copy">
+      <h1>Building the talent<br>infrastructure for finance.</h1>
+      <p class="sub">Vantedge is building a new way for finance firms to identify and evaluate emerging talent.</p>
+      <div class="ctas">
+        <a class="pill" href="#start">For employers<img class="arrow18" src="{{ S }}arrow-cream.svg" alt="" /></a>
+        <a class="ulink" href="#start">For students{{ ink_arrow }}</a>
+      </div>
+      <div class="stats">
+        <div class="stat"><b data-count="50" data-suffix="+">50+</b><span>Top universities</span></div>
+        <div class="stat-div"></div>
+        <div class="stat"><b data-count="100" data-suffix="+">100+</b><span>Finance talents</span></div>
+        <div class="stat-div"></div>
+        <div class="stat"><b data-count="60" data-suffix="+">60+</b><span>Countries</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ARE YOU HIRING ================= -->
+<section class="start" id="start">
+  <div class="backdrop" aria-hidden="true">
+    <img class="bg" src="{{ S }}start-bg.png" alt="" aria-hidden="true" />
+    <div class="wash"></div><div class="fl"></div><div class="ft"></div><div class="fb"></div>
+  </div>
+  <div class="frame">
+    <div class="start-copy">
+      <h2>Are you hiring,<br>or are you<br>a student?</h2>
+      <p>Two pathways, one platform. Firms find proven finance talent. Students prove what they can do.</p>
+    </div>
+    <a class="path emp" href="{{ booking_url }}" target="_blank" rel="noopener">
+      <img class="photo" src="{{ S }}card-employers.png" alt="" />
+      <div class="pfade"></div>
+      <div class="content">
+        <div class="txt">
+          <span class="eyebrow">For employers</span>
+          <h3>Find proven finance talent</h3>
+          <p>Discover candidates through real-world projects and structured assessment.</p>
+        </div>
+        <div class="cta"><span class="circle"><img src="{{ S }}circle-arrow-ink.svg" alt="" /></span>Book a free call</div>
+      </div>
+    </a>
+    <a class="path stu" href="{{ waitlist_url }}">
+      <img class="photo" src="{{ S }}card-students.png" alt="" />
+      <div class="pfade"></div>
+      <div class="content">
+        <div class="txt">
+          <span class="eyebrow">For students</span>
+          <h3>Show your skills and get discovered</h3>
+          <p>Complete practical projects, prove your ability and unlock opportunities in finance.</p>
+        </div>
+        <div class="cta"><span class="circle dark"><img src="{{ S }}circle-arrow-cream.svg" alt="" /></span>Join the waitlist</div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- ================= WHAT WE DO ================= -->
+<section class="wwd" id="what-we-do">
+  <div class="backdrop" aria-hidden="true">
+    <img class="bg" src="{{ S }}wwd.png" alt="" aria-hidden="true" />
+    <div class="wash"></div><div class="fr"></div><div class="ft"></div><div class="fb"></div>
+  </div>
+  <div class="frame">
+    <div class="wwd-copy">
+      <div class="label"><span>What we do</span><i></i></div>
+      <h2>Real work, structured assessment and verified proof of ability.</h2>
+      <p>A better way for finance talent to show what they can do, and for employers to find them.</p>
+      <a class="ulink" href="#about">Learn More{{ ink_arrow }}</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= UNIVERSITY STRIP ================= -->
+{% set unis = [('cambridge','University of Cambridge',154),('bocconi','Bocconi University',91),('lse','London School of Economics',89),('ucl','UCL',57),('kcl',"King's College London",48),('essec','ESSEC',34),('warwick','Warwick Business School',32),('nyu-stern','NYU Stern',36),('hec-paris','HEC Paris',71),('escp','ESCP',69)] %}
+<section class="unis" aria-label="Where our members study">
+  <h4>Where our members study</h4>
+  <div class="ticker">
+    <div class="track">
+      {% for loop_n in [0,1] %}{% for slug,name,w in unis %}<img src="{{ S }}uni-{{ slug }}.png" alt="{{ name if loop_n == 0 else '' }}" style="width:{{ w }}px"{% if loop_n %} aria-hidden="true"{% endif %} />{% endfor %}{% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- ================= LEADERSHIP ================= -->
+<section class="advisors" id="advisor">
+  <div class="frame">
+    <div class="adv-content">
+      <h2>Leadership and Board of Advisors</h2>
+      <div class="greg" role="button" tabindex="0" data-bio="greg">
+        <img src="{{ S }}adv-greg.png" alt="Gregory Bournet" />
+        <div class="profile">
+          <span class="kick">Board advisor</span>
+          <span class="name">Gregory Bournet</span>
+          <span class="role">Partner, PwC Malaysia, Corporate Finance and M&amp;A</span>
+          <div class="bio">
+            <p>Gregory leads the Corporate Finance and Mergers &amp; Acquisitions practice at PwC across Malaysia and Vietnam. He has advised multinational corporations, private equity firms, sovereign wealth funds and family-owned businesses on transactions ranging from mid-market acquisitions to billion-dollar cross-border deals.</p>
+            <p>At Vantedge, Gregory works closely with the team as a strategic sounding board, drawing on his extensive experience in corporate finance and M&amp;A to provide practical perspectives, challenge ideas and share insights from real-world transactions. He also lends his expertise to the development of Vantedge's initiatives, helping ensure that our approach is grounded in industry realities and informed by the perspectives of an experienced practitioner.</p>
+          </div>
+        </div>
+      </div>
+      <div class="adv-grid">
+        <div class="adv" role="button" tabindex="0" data-bio="xuenna">
+          <img src="{{ S }}adv-xuenna.png" alt="Xuenna Aw" />
+          <div class="profile">
+            <span class="name">Xuenna Aw</span>
+            <span class="role">Founder &amp; CEO, Vantedge</span>
+            <p class="bio">Xuenna leads strategy, direction, and global expansion across Europe, APAC, and North America at Vantedge, building the talent infrastructure for finance to fix a broken early-career recruitment pipeline. Previously in Mergers and Acquisitions at PwC, she saw firsthand how outdated the barrier to entry is for aspiring analysts, driving her focus on replacing passive résumé screening with real-world proof of capability.</p>
+            <span class="more">Read full bio<img src="{{ S }}arrow-ink-sm.svg" alt="" /></span>
+          </div>
+        </div>
+        <div class="adv" role="button" tabindex="0" data-bio="mayur">
+          <img src="{{ S }}adv-mayur.png" alt="Mayur Tejwani" />
+          <div class="profile">
+            <span class="name">Mayur Tejwani</span>
+            <span class="role">Ex-McKinsey, JPMorgan | Chartered Accountant &amp; Esade MBA</span>
+            <p class="bio">Mayur Tejwani is a strategy and M&amp;A professional with a Chartered Accountant qualification and an MBA from Esade. He leads M&amp;A and value creation at a deeptech healthcare company in Barcelona. Prior to that, he spent more than four years at McKinsey advising banks and corporates on strategy, investment banking, and sustainability, and two years at JPMorgan building financial models. Most at home where a valuation has to hold up in front of a buyer, he works across Europe and the GCC. At Vantedge, he leverages his consulting and strategy background to support our team by stress-testing and validating our ideas and execution.</p>
+            <span class="more">Read full bio<img src="{{ S }}arrow-ink-sm.svg" alt="" /></span>
+          </div>
+        </div>
+        <div class="adv">
+          <img src="{{ S }}adv-aniya.png" alt="Aniya Sood" />
+          <div class="profile">
+            <span class="name">Aniya Sood</span>
+            <span class="role">Analyst at EY-Parthenon</span>
+            <p class="bio">TBC</p>
+            <span class="more">Read full bio<img src="{{ S }}arrow-ink-sm.svg" alt="" /></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ABOUT ================= -->
+<section class="about" id="about">
+  <div class="backdrop" aria-hidden="true">
+    <img class="bg" src="{{ S }}about-bg.png" alt="" aria-hidden="true" />
+    <div class="fl"></div><div class="ft"></div><div class="fb"></div>
+  </div>
+  <div class="frame">
+    <span class="kick">About Vantedge</span>
+    <h2>Rethinking how<br>finance talent is<br>discovered.</h2>
+    <div class="cards">
+      <div class="glass g1"><div class="in"><span class="eyebrow">The problem</span><h3>Finance hiring still<br>relies on credentials.</h3><p>CVs and interviews can only tell us so much.</p></div></div>
+      <div class="glass g2"><div class="in"><span class="eyebrow">Our approach</span><h3>A more complete<br>view of talent.</h3><p>We’re building a platform where finance talent can demonstrate ability through real work.</p></div></div>
+      <div class="glass g3"><div class="in"><span class="eyebrow">Where we are today</span><h3>Working towards<br>greater access.</h3><p>Partnering with students and finance employers to shape a more practical approach.</p></div></div>
+    </div>
+    <p class="vision">Our vision is to make demonstrated ability<br>a more meaningful part of how finance hires.</p>
+  </div>
+</section>
+
+<!-- ================= PARTNERS ================= -->
+<section class="partners" id="partners">
+  <div class="frame">
+    <div class="p-head">
+      <span class="kick">Chapters</span>
+      <h2>Partner universities</h2>
+      <p>Our on-the-ground chapters running local events, research, and recruitment.</p>
+    </div>
+    <div class="chapters">
+      <article class="chapter">
+        <div class="campus"><img src="{{ S }}campus-bocconi.png" alt="Milan Cathedral square" /><span class="tag">Founding chapter · Milan, Italy</span></div>
+        <div class="ch-body">
+          <div class="identity"><span class="tile"><img src="{{ S }}logo-bocconi.png" alt="Bocconi logo" /></span><div><h3>Bocconi University</h3><span>Europe Research Hub</span></div></div>
+          <p>As our founding chapter, Bocconi University serves as the central operational hub for Vantedge in Europe. We run local in-person events, workshops, and networking sessions on campus, allowing students to connect face-to-face while collaborating with our wider global research team.</p>
+          <a class="join" href="{{ waitlist_url }}">Interested to join?</a>
+          <p class="note">Select <b>Bocconi</b> in the application drop-down so we route you to the correct chapter lead.</p>
+        </div>
+      </article>
+      <article class="chapter">
+        <div class="campus"><img src="{{ S }}campus-bath.png" alt="Pulteney Bridge, Bath" /><span class="tag">Established chapter · United Kingdom</span></div>
+        <div class="ch-body">
+          <div class="identity"><span class="tile"><img src="{{ S }}logo-bath.png" alt="University of Bath logo" /></span><div><h3>University of Bath</h3><span>UK Research Hub</span></div></div>
+          <p>Our Bath Chapter powers Vantedge's presence and research initiatives in the UK. If you're a student at the University of Bath looking to gain hands-on corporate finance experience, contribute to cross-border research, or lead local campus initiatives, our UK team is actively recruiting.</p>
+          <a class="join" href="{{ waitlist_url }}">Interested to join?</a>
+          <p class="note">Select <b>Bath</b> in the application drop-down so we route you to the correct chapter lead.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+{% set enquiry_types = ['General enquiry','Corporate partnership','Recruitment and talent sourcing','Events and speaking engagements','University and chapter collaboration','Joining the early team','Media and press'] %}
+<section class="contact" id="contact">
+  <div class="frame">
+    {% if tally_form_id %}
+    <div class="form-card">
+      <div>
+        <h2>Get in touch</h2>
+        <p class="intro">If you’re interested in joining us as part of our early team, or looking to collaborate, we’re always open to a conversation.</p>
+      </div>
+      <iframe class="tally" data-tally-src="https://tally.so/embed/{{ tally_form_id }}?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
+              loading="lazy" width="100%" height="520" frameborder="0" marginheight="0" marginwidth="0" title="Get in touch"></iframe>
+    </div>
+    {% else %}
+    <form class="form-card" id="contactForm" novalidate>
+      <div>
+        <h2>Get in touch</h2>
+        <p class="intro">If you’re interested in joining us as part of our early team, or looking to collaborate, we’re always open to a conversation.</p>
+      </div>
+      <div class="sp"></div>
+      <div class="field" data-f="name"><label for="f-name">Full name *</label><input id="f-name" name="name" autocomplete="name" placeholder="Your name" required /></div>
+      <div class="field" data-f="email"><label for="f-email">Email *</label><input id="f-email" name="email" type="email" autocomplete="email" placeholder="Email address" required /></div>
+      <div class="field" data-f="enquiry"><label for="f-enq">Nature of enquiry *</label>
+        <select id="f-enq" name="enquiry" required><option value="" disabled selected>Please select an option</option>{% for t in enquiry_types %}<option>{{ t }}</option>{% endfor %}</select></div>
+      <div class="field" data-f="message"><label for="f-msg">Message *</label><textarea id="f-msg" name="message" placeholder="Tell us a little about yourself or your idea" required></textarea></div>
+      <label class="consent" data-f="consent"><input type="checkbox" name="consent" required /><span>I agree to Vantedge processing my data to respond to this enquiry.</span></label>
+      <button class="send" type="submit">Send message<img src="{{ S }}arrow-paper.svg" alt="" /></button>
+      <p class="form-msg" role="status" hidden></p>
+    </form>
+    {% endif %}
+    <div class="details">
+      <div class="mail">
+        <span class="ic"><img src="{{ S }}icon-mail.svg" alt="" /></span>
+        <div><span class="c-eyebrow">General &amp; business</span><a href="mailto:{{ contact_email }}">{{ contact_email }}</a></div>
+      </div>
+      <div class="topics">
+        <div class="box"><span class="c-eyebrow">Corporate partnerships</span><h3>Partner with Vantedge</h3><p>Sponsor assessments, source verified talent, or co-design real-world projects.</p></div>
+        <div class="box"><span class="c-eyebrow">Events &amp; universities</span><h3>Bring Vantedge to you</h3><p>Workshops, panels, speaking slots and campus chapter collaborations.</p></div>
+      </div>
+      <div class="box"><span class="c-eyebrow">Response time</span><h3>1 business day</h3><p>We aim to reply to every message within one business day.</p></div>
+      <div class="follow">
+        <span class="c-eyebrow">Follow</span>
+        <a class="li" href="https://www.linkedin.com/company/vantedge-global" target="_blank" rel="noopener"><img src="{{ S }}icon-linkedin.svg" alt="" />LinkedIn</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
+{% block body_end %}
+<!-- ================= BIO POPUPS ================= -->
+{% set bios = {
+  'greg': {'img':'pop-greg.png','k':'Board advisor','n':'Gregory Bournet','r':'Partner, PwC Malaysia, Corporate Finance and M&A','p':[
+    "Gregory leads the Corporate Finance and Mergers & Acquisitions practice at PwC across Malaysia and Vietnam. He has advised multinational corporations, private equity firms, sovereign wealth funds and family-owned businesses on transactions ranging from mid-market acquisitions to billion-dollar cross-border deals.",
+    "At Vantedge, Gregory works closely with the team as a strategic sounding board, drawing on his extensive experience in corporate finance and M&A to provide practical perspectives, challenge ideas and share insights from real-world transactions. He also lends his expertise to the development of Vantedge's initiatives, helping ensure that our approach is grounded in industry realities and informed by the perspectives of an experienced practitioner."]},
+  'mayur': {'img':'pop-mayur.png','k':'Board advisor','n':'Mayur Tejwani','r':'Ex-McKinsey, JPMorgan | Chartered Accountant & Esade MBA','p':[
+    "Mayur Tejwani is a strategy and M&A professional with a Chartered Accountant qualification and an MBA from Esade. He leads M&A and value creation at a deeptech healthcare company in Barcelona. Prior to that, he spent more than four years at McKinsey advising banks and corporates on strategy, investment banking, and sustainability, and two years at JPMorgan building financial models. Most at home where a valuation has to hold up in front of a buyer, he works across Europe and the GCC. At Vantedge, he leverages his consulting and strategy background to support our team by stress-testing and validating our ideas and execution."]},
+  'xuenna': {'img':'pop-xuenna.png','k':'Founder & CEO','n':'Xuenna Aw','r':'Founder & CEO, Vantedge','p':[
+    "As Founder and CEO, Xuenna leads strategy, direction, and global expansion across Europe, APAC, and North America at Vantedge, building the talent infrastructure for finance to fix a broken early-career recruitment pipeline. Previously in Mergers and Acquisitions at PwC, she saw firsthand how outdated the barrier to entry is for aspiring analysts, driving her focus on replacing passive résumé screening with real-world proof of capability."]}
+} %}
+{% for key, b in bios.items() %}
+<div class="modal" id="bio-{{ key }}" role="dialog" aria-modal="true" aria-labelledby="bio-{{ key }}-name">
+  <div class="popup">
+    <div class="pop-head">
+      <img src="{{ S }}{{ b.img }}" alt="" />
+      <div class="pop-id"><span class="k">{{ b.k }}</span><span class="n" id="bio-{{ key }}-name">{{ b.n }}</span><span class="r">{{ b.r }}</span></div>
+    </div>
+    <button class="pop-close" aria-label="Close"><img src="{{ S }}close.svg" alt="" /></button>
+    <hr />
+    <div class="pop-bio">{% for para in b.p %}<p>{{ para }}</p>{% endfor %}</div>
+  </div>
+</div>
+{% endfor %}
+
+<script>
+  // Count-up stats (Figma counter animation)
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const statIO = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return; statIO.unobserve(e.target); if (reduce) return;
+    const el = e.target, to = +el.dataset.count, sfx = el.dataset.suffix || '', t0 = performance.now();
+    (function tick(t){ const p = Math.min(1,(t-t0)/1400); el.textContent = Math.round(to*(1-Math.pow(1-p,3))) + sfx; if (p<1) requestAnimationFrame(tick); })(t0);
+  }), {threshold:.6});
+  document.querySelectorAll('[data-count]').forEach(el => statIO.observe(el));
+
+  // Bio popups
+  let lastFocus = null;
+  function openBio(key){
+    const m = document.getElementById('bio-' + key); if (!m) return;
+    lastFocus = document.activeElement;
+    m.classList.add('open'); requestAnimationFrame(() => m.classList.add('show'));
+    document.body.style.overflow = 'hidden'; m.querySelector('.pop-close').focus();
+  }
+  function closeBio(m){
+    m.classList.remove('show'); setTimeout(() => m.classList.remove('open'), 200);
+    document.body.style.overflow = ''; lastFocus && lastFocus.focus();
+  }
+  document.querySelectorAll('[data-bio]').forEach(el => {
+    el.addEventListener('click', () => openBio(el.dataset.bio));
+    el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openBio(el.dataset.bio); } });
+  });
+  document.querySelectorAll('.modal').forEach(m => {
+    m.addEventListener('click', e => { if (e.target === m || e.target.closest('.pop-close')) closeBio(m); });
+  });
+  addEventListener('keydown', e => { if (e.key === 'Escape') document.querySelectorAll('.modal.open').forEach(closeBio); });
+
+  // Tally form (used when SITE["tally_form_id"] is set in app.py)
+  if (document.querySelector('iframe[data-tally-src]')) {
+    const loadTally = () => window.Tally ? Tally.loadEmbeds() :
+      document.querySelectorAll('iframe[data-tally-src]:not([src])').forEach(f => f.src = f.dataset.tallySrc);
+    const sc = document.createElement('script');
+    sc.src = 'https://tally.so/widgets/embed.js'; sc.onload = loadTally; sc.onerror = loadTally;
+    document.body.appendChild(sc);
+  }
+
+  // Fallback contact form (no Tally ID yet): validates, then opens the visitor's email app pre-filled.
+  const form = document.getElementById('contactForm');
+  if (form) form.addEventListener('submit', e => {
+    e.preventDefault();
+    const d = Object.fromEntries(new FormData(form)); d.consent = form.consent.checked;
+    const bad = {
+      name: !(d.name||'').trim(),
+      email: !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test((d.email||'').trim()),
+      enquiry: !d.enquiry,
+      message: (d.message||'').trim().length < 10,
+      consent: !d.consent
+    };
+    form.querySelectorAll('[data-f]').forEach(f => f.classList.toggle('err', bad[f.dataset.f]));
+    const msg = form.querySelector('.form-msg');
+    const first = Object.keys(bad).find(k => bad[k]);
+    if (first) { msg.hidden = false; msg.textContent = 'Please complete the highlighted fields.'; form.querySelector(`[name="${first}"]`).focus(); return; }
+    msg.hidden = true;
+    const body = `Name: ${d.name}\nEmail: ${d.email}\nEnquiry: ${d.enquiry}\n\n${d.message}`;
+    location.href = `mailto:{{ contact_email }}?subject=${encodeURIComponent('[Vantedge] ' + d.enquiry + ' — ' + d.name)}&body=${encodeURIComponent(body)}`;
+  });
+
+
+</script>
+{% endblock %}

@@ -1,0 +1,79 @@
+{% extends 'layout.html' %}
+{% block title %}Join the waitlist — Vantedge{% endblock %}
+{% block description %}Join the Vantedge waitlist: complete practical projects, prove your ability and unlock opportunities in finance.{% endblock %}
+{% block styles %}
+<style>
+  /* Same look as the homepage "Get in touch" section (Figma 297:197) */
+  .wl{background:#f5f3ee}
+  .wl .frame{min-height:100vh;padding:150px 80px 110px;display:flex;gap:80px;align-items:flex-start}
+  .wl-card{width:600px;flex:none;background:#fbfaf6;border-radius:24px;padding:48px;display:flex;flex-direction:column;gap:22px;filter:drop-shadow(0 12px 20px rgba(13,13,26,.05))}
+  .wl-card .eyebrow,.c-eyebrow{font-weight:500;font-size:12px;letter-spacing:2.16px;text-transform:uppercase;color:#5e5a52;line-height:normal}
+  .wl-card h1{margin-top:12px;font-family:var(--inter);font-weight:600;font-size:44px;line-height:1.1;letter-spacing:-1.32px}
+  .wl-card .intro{margin-top:12px;font-size:17px;line-height:1.55;color:#5e5a52}
+  .wl-card .tally{display:block;width:100%;min-height:420px;border:0;margin-top:6px}
+  .wl-details{flex:1;min-width:0;padding-top:40px;display:flex;flex-direction:column;gap:28px}
+  .box{background:#fbfaf6;border-radius:18px;padding:28px;display:flex;flex-direction:column;gap:10px}
+  .box h3{font-family:var(--inter);font-weight:600;font-size:22px;line-height:1.25;letter-spacing:-.22px}
+  .box p{font-size:14px;line-height:1.55;color:#5e5a52}
+  .box p b{font-weight:400;color:var(--ink)}
+  .wl-photo{position:relative;height:300px;border-radius:18px;overflow:hidden}
+  .wl-photo img{width:100%;height:100%;object-fit:cover;object-position:center 35%}
+  .wl-photo .fade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(245,243,238,0) 55%,rgba(245,243,238,.35) 100%)}
+  .back{align-self:flex-start;display:inline-flex;align-items:center;gap:12px;font-weight:500;font-size:16px;color:var(--ink);padding-bottom:8px;border-bottom:1px solid var(--stone-400);line-height:normal}
+  .back:hover{border-color:var(--ink)}
+  .back img{width:18px;height:18px;transform:rotate(180deg)}
+  @media (max-width:1180px){
+    .wl .frame{flex-direction:column}
+    .wl-card{width:100%;max-width:600px}
+    .wl-details{padding-top:0;width:100%;max-width:600px}
+  }
+  @media (max-width:900px){
+    .wl .frame{padding:110px 24px 72px}
+    .wl-card{padding:32px 24px}
+    .wl-card h1{font-size:34px}
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="wl">
+  <div class="frame">
+    <div class="wl-card">
+      <div>
+        <span class="eyebrow">For students</span>
+        <h1>Join the waitlist</h1>
+        <p class="intro">Complete practical projects, prove your ability and unlock opportunities in finance.</p>
+      </div>
+      <iframe class="tally" data-tally-src="https://tally.so/embed/{{ waitlist_tally_id }}?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
+              loading="lazy" width="100%" height="560" frameborder="0" marginheight="0" marginwidth="0" title="Join the waitlist"></iframe>
+    </div>
+
+    <div class="wl-details">
+      <div class="wl-photo"><img src="{{ S }}campus-bath.png" alt="" /><div class="fade"></div></div>
+      <div class="box">
+        <span class="c-eyebrow">Partner universities</span>
+        <h3>Joining through a chapter?</h3>
+        <p>Enter <b>Bocconi</b> or <b>Bath</b> under University so we route you to the correct chapter lead.</p>
+      </div>
+      <div class="box">
+        <span class="c-eyebrow">Questions</span>
+        <h3>Get in touch</h3>
+        <p>Email us at <a href="mailto:{{ contact_email }}"><b>{{ contact_email }}</b></a>. We aim to reply within one business day.</p>
+      </div>
+      <a class="back" href="{{ home }}"><img src="{{ S }}arrow-ink.svg" alt="" />Back to home</a>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block body_end %}
+<script>
+  (function(){
+    const load = () => window.Tally ? Tally.loadEmbeds() :
+      document.querySelectorAll('iframe[data-tally-src]:not([src])').forEach(f => f.src = f.dataset.tallySrc);
+    const sc = document.createElement('script');
+    sc.src = 'https://tally.so/widgets/embed.js'; sc.onload = load; sc.onerror = load;
+    document.body.appendChild(sc);
+  })();
+</script>
+{% endblock %}
