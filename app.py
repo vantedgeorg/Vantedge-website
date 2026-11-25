@@ -16,6 +16,7 @@ SITE = {
     "tally_form_id": "Yj4KK0",        # "Get in touch" Tally form: the code after tally.so/r/
     "waitlist_tally_id": "EqxrRB",    # Tally form on /waitlist ("Join the waitlist" + "Interested to join?")
     "booking_url": "https://calendly.com/contact-vantedgeorg/30min",  # "Book a free call"
+    "book_tally_id": "9N7bjp",              # Tally form on /book ("Book a call"), the code after tally.so/r/
 }
 
 DIVISION_LABELS = {"ma": "M&A", "dcm": "DCM", "markets": "Global Markets", "equity": "Equity Research"}
@@ -33,10 +34,12 @@ def page(template, **ctx):
         waitlist_url=url_for("waitlist"),
         waitlist_tally_id=SITE["waitlist_tally_id"],
         booking_url=SITE["booking_url"],
+        book_tally_id=SITE["book_tally_id"],
         home=url_for("home"),
         research_url=url_for("research"),
         partners_url=url_for("partnerships"),
         faq_url=url_for("faq"),
+        book_url=url_for("book"),
         **ctx,
     )
 
@@ -65,6 +68,12 @@ def partnerships():
 def faq():
     """FAQ page — questions from firms and candidates."""
     return page("faq.html")
+
+
+@app.route("/book")
+def book():
+    """Book a call — landing page for firms, with the Calendly calendar embedded."""
+    return page("book.html")
 
 
 @app.route("/waitlist")

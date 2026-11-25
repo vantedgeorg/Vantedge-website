@@ -127,7 +127,7 @@
             {% for p in paras %}
               {% if p == 'EMAIL' %}<p><a href="mailto:{{ contact_email }}">{{ contact_email }}</a>. We reply within one business day.</p>
               {% elif q == 'How do I get involved?' %}<p><a href="{{ waitlist_url }}">Join the waitlist</a>. You'll be among the first to hear when we open.</p>
-              {% elif q == 'What happens if I book a call?' %}<p>We ask how you hire juniors and what is hardest about it. No pitch, nothing to buy. <a href="{{ booking_url }}" target="_blank" rel="noopener">Book a free call</a>.</p>
+              {% elif q == 'What happens if I book a call?' %}<p>We ask how you hire juniors and what is hardest about it. No pitch, nothing to buy. <a href="{{ book_url }}">Book a free call</a>.</p>
               {% else %}<p>{{ p }}</p>{% endif %}
             {% endfor %}
           </div>
