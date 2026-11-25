@@ -10,26 +10,26 @@
 <link rel="apple-touch-icon" href="/static/apple-touch-icon.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@500;600;700&family=Geist:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap">
 <style>
   :root{
-    color-scheme: dark;
-    --bg:#07081a;
-    --surface:#0c0e1e;
-    --raise:#11142a;
-    --hover:#161a33;
-    --line:#1e2238;
-    --line-2:#2a2f4a;
-    --text:#f3f1ea;
-    --muted:#9a9db2;
-    --dim:#686c86;
-    --cream:#dfdcc9;
-    --cream-2:#ede9e0;
-    --ok:#94c2a3; --ok-bg:rgba(148,194,163,.1);
-    --warn:#d8b877; --warn-bg:rgba(216,184,119,.1);
-    --bad:#dc8f8a; --bad-bg:rgba(220,143,138,.1);
-    --display:'Playfair Display', Georgia, 'Times New Roman', serif;
-    --body:'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+    color-scheme: light;
+    --bg:#f5f3ee;
+    --surface:#fbfaf6;
+    --raise:#f1eee8;
+    --hover:#ebe7df;
+    --line:#e3dfd6;
+    --line-2:#cfcac0;
+    --text:#0c0e1e;
+    --muted:#5e5a52;
+    --dim:#8a857a;
+    --cream:#1b1916;
+    --cream-2:#e3dfd6;
+    --ok:#3f7a52; --ok-bg:rgba(63,122,82,.1);
+    --warn:#94681a; --warn-bg:rgba(148,104,26,.1);
+    --bad:#b0463f; --bad-bg:rgba(176,70,63,.08);
+    --display:'Schibsted Grotesk', 'Inter', sans-serif;
+    --body:'Geist', system-ui, -apple-system, sans-serif;
     --mono:'IBM Plex Mono', ui-monospace, Menlo, monospace;
     --logo:'Times New Roman', Times, serif;
     --r:10px;
@@ -54,7 +54,8 @@
   .shell{display:grid;grid-template-columns:var(--side) minmax(0,1fr);min-height:100%}
   .side{position:sticky;top:env(safe-area-inset-top,0px);height:100vh;border-right:1px solid var(--line);background:var(--surface);display:flex;flex-direction:column;padding:26px 16px 18px}
   .brand{padding:0 10px 26px}
-  .wordmark{font-family:var(--logo);font-weight:400;color:var(--cream);letter-spacing:.42em;font-size:17px;white-space:nowrap}
+  .wordmark{display:inline-flex;align-items:center;gap:12px;font-family:var(--logo);font-weight:400;color:var(--cream);letter-spacing:.42em;font-size:17px;white-space:nowrap}
+  .wordmark .wm-mark{width:20px;height:20px;flex:none}
   .brand .label{display:block;margin-top:6px;letter-spacing:.12em;font-size:9.5px}
   .modes{display:grid;grid-template-columns:1fr 1fr;background:var(--raise);border:1px solid var(--line);border-radius:8px;padding:3px;margin:0 4px 22px}
   .modes button{background:none;border:0;border-radius:6px;padding:7px 0;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);font-weight:600}
@@ -69,7 +70,7 @@
   .side-foot{margin-top:auto;display:flex;flex-direction:column;gap:12px}
   .conn{display:flex;align-items:center;gap:8px;font-size:11.5px;color:var(--dim);padding:0 12px}
   .conn .dot{width:6px;height:6px;border-radius:50%;background:var(--dim)}
-  .conn.live .dot{background:var(--ok);box-shadow:0 0 0 3px rgba(148,194,163,.15)}
+  .conn.live .dot{background:var(--ok);box-shadow:0 0 0 3px rgba(63,122,82,.15)}
   .whoami{display:flex;align-items:center;gap:10px;padding:12px;border:1px solid var(--line);border-radius:var(--r);background:var(--raise)}
   .whoami .t{flex:1;min-width:0;line-height:1.3}
   .whoami b{display:block;font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -97,10 +98,10 @@
   /* ===== Buttons & chips ===== */
   .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:8px;padding:10px 16px;font-size:13px;font-weight:600;letter-spacing:.03em;border:1px solid var(--line-2);background:var(--raise);color:var(--text);transition:border-color .15s,background .15s,color .15s;white-space:nowrap}
   .btn:hover{border-color:var(--cream)}
-  .btn.pri{background:var(--cream);border-color:var(--cream);color:#0c0e1e}
-  .btn.pri:hover{background:var(--cream-2)}
+  .btn.pri{background:var(--cream);border-color:var(--cream);color:#ece9e0}
+  .btn.pri:hover{background:#000;border-color:#000}
   .btn.ghost{background:transparent}
-  .btn.danger{background:transparent;color:var(--bad);border-color:rgba(220,143,138,.35)}
+  .btn.danger{background:transparent;color:var(--bad);border-color:rgba(176,70,63,.35)}
   .btn.danger:hover{border-color:var(--bad)}
   .btn.sm{padding:7px 12px;font-size:12px}
   .btn[disabled]{opacity:.4;cursor:not-allowed}
@@ -118,9 +119,9 @@
   .notice{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;background:var(--cream-2);color:#0c0e1e;border-radius:var(--r);padding:18px 22px}
   .notice b{font-family:var(--display);font-size:17px;font-weight:600;display:block}
   .notice p{margin:2px 0 0;font-size:13.5px;max-width:62ch;color:#2b2e44}
-  .notice .btn.pri{background:#0c0e1e;border-color:#0c0e1e;color:var(--cream)}
-  .notice .btn.pri:hover{background:#1a1d33}
-  .notice.bad{background:var(--bad-bg);color:var(--text);border:1px solid rgba(220,143,138,.3)}
+  .notice .btn.pri{background:#1b1916;border-color:#1b1916;color:#ece9e0}
+  .notice .btn.pri:hover{background:#000}
+  .notice.bad{background:var(--bad-bg);color:var(--text);border:1px solid rgba(176,70,63,.3)}
   .notice.bad b{color:var(--bad)}
   .notice.bad p{color:var(--muted)}
 
@@ -144,7 +145,7 @@
   .step{display:grid;grid-template-columns:26px minmax(0,1fr) auto;gap:14px;align-items:center;padding:13px 0;border-top:1px solid var(--line)}
   .step:first-child{border-top:0}
   .step .mk{width:22px;height:22px;border-radius:50%;border:1px solid var(--line-2);display:grid;place-items:center;font-size:11px;color:var(--dim)}
-  .step.done .mk{background:var(--cream);border-color:var(--cream);color:#0c0e1e}
+  .step.done .mk{background:var(--cream);border-color:var(--cream);color:#ece9e0}
   .step.done .mk svg{width:12px;height:12px;stroke-width:2.4}
   .step .s{font-size:12.5px;color:var(--dim)}
   .step.done .t{color:var(--muted)}
@@ -201,7 +202,7 @@
   .field label{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);font-weight:600}
   .field label .req{color:var(--warn)}
   .field input,.field select,.field textarea{background:var(--raise);border:1px solid var(--line-2);border-radius:8px;padding:11px 13px;width:100%;min-width:0;transition:border-color .15s}
-  .field input:hover,.field select:hover,.field textarea:hover{border-color:#3a4062}
+  .field input:hover,.field select:hover,.field textarea:hover{border-color:#a39d91}
   .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--cream)}
   .field input:disabled,.field select:disabled{color:var(--muted);background:transparent;border-color:var(--line);cursor:default}
   .field .hint{font-size:12px;color:var(--dim)}
@@ -240,7 +241,7 @@
   .terms p{margin:0;color:var(--muted);font-size:13.5px;max-width:70ch}
   .checks{display:flex;flex-direction:column;gap:12px;margin-bottom:22px}
   .ck{display:flex;gap:12px;align-items:flex-start;font-size:14px;cursor:pointer}
-  .ck input{width:17px;height:17px;margin-top:3px;accent-color:#dfdcc9;flex:0 0 auto}
+  .ck input{width:17px;height:17px;margin-top:3px;accent-color:#1b1916;flex:0 0 auto}
   .sign-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:20px;align-items:start}
   .pad{position:relative;background:var(--bg);border:1px solid var(--line-2);border-radius:8px;height:168px;touch-action:none}
   .pad canvas{position:absolute;inset:0;width:100%;height:100%;border-radius:8px;cursor:crosshair}
@@ -271,15 +272,15 @@
   td .sub{font-size:12px;color:var(--dim);display:block}
 
   /* ===== Modal ===== */
-  .scrim{position:fixed;inset:0;background:rgba(3,4,12,.82);backdrop-filter:blur(3px);z-index:50;display:grid;place-items:center;padding:20px}
-  .modal{background:var(--surface);border:1px solid var(--line-2);border-radius:12px;width:min(720px,100%);max-height:calc(100vh - 40px);display:flex;flex-direction:column;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+  .scrim{position:fixed;inset:0;background:rgba(27,25,22,.42);backdrop-filter:blur(3px);z-index:50;display:grid;place-items:center;padding:20px}
+  .modal{background:var(--surface);border:1px solid var(--line-2);border-radius:12px;width:min(720px,100%);max-height:calc(100vh - 40px);display:flex;flex-direction:column;overflow:hidden;box-shadow:0 30px 80px rgba(27,25,22,.22)}
   .modal.sm{width:min(460px,100%)}
   .mh{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding:20px 22px;border-bottom:1px solid var(--line)}
   .mh p{margin:3px 0 0;color:var(--dim);font-size:12.5px}
   .mb{padding:22px;overflow:auto}
   .mf{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:14px 22px;border-top:1px solid var(--line);flex-wrap:wrap}
   .mf .r{display:flex;gap:8px;flex-wrap:wrap;margin-left:auto}
-  .sheet{position:relative;background:#f8f7f3;color:#0c0e1e;border-radius:4px;aspect-ratio:210/297;width:400px;max-width:100%;margin:0 auto;padding:34px 32px;overflow:hidden;box-shadow:0 10px 40px rgba(0,0,0,.4)}
+  .sheet{position:relative;background:#f8f7f3;color:#0c0e1e;border-radius:4px;aspect-ratio:210/297;width:400px;max-width:100%;margin:0 auto;padding:34px 32px;overflow:hidden;box-shadow:0 10px 40px rgba(27,25,22,.16)}
   .sheet .w{font-family:var(--logo);letter-spacing:.38em;font-size:10.5px;color:#4a4f6a}
   .sheet h3{font-family:var(--display);font-size:21px;font-weight:600;margin:24px 0 8px}
   .sheet .k{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#4a4f6a;margin-top:22px;font-weight:600}
@@ -297,9 +298,9 @@
   .dz p{margin:2px 0 0;font-size:12.5px;color:var(--dim)}
 
   /* ===== Toast ===== */
-  .toast{position:fixed;left:50%;bottom:calc(26px + env(safe-area-inset-bottom,0px));transform:translate(-50%,16px);background:var(--cream-2);color:#0c0e1e;padding:11px 18px;border-radius:8px;font-size:13.5px;font-weight:600;opacity:0;transition:.22s;z-index:70;pointer-events:none;max-width:calc(100% - 32px);text-align:center;box-shadow:0 10px 30px rgba(0,0,0,.4)}
+  .toast{position:fixed;left:50%;bottom:calc(26px + env(safe-area-inset-bottom,0px));transform:translate(-50%,16px);background:var(--cream-2);color:#0c0e1e;padding:11px 18px;border-radius:8px;font-size:13.5px;font-weight:600;opacity:0;transition:.22s;z-index:70;pointer-events:none;max-width:calc(100% - 32px);text-align:center;box-shadow:0 10px 30px rgba(27,25,22,.18)}
   .toast.on{opacity:1;transform:translate(-50%,0)}
-  .toast.bad{background:#3a2226;color:#f3d6d4}
+  .toast.bad{background:#f6dcd9;color:#7a2a24}
 
   /* ===== Responsive ===== */
   @media (max-width:1100px){.lib{grid-template-columns:repeat(2,minmax(0,1fr))}}
@@ -355,17 +356,17 @@
   .modal.vfull .viewer canvas{margin:auto}
   .modal.vfull .viewer video,.modal.vfull .viewer img{max-height:100%}
   .viewer{position:relative;background:var(--bg);border-radius:8px;overflow:auto;min-height:55vh;max-height:72vh;display:flex;justify-content:center;align-items:flex-start;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
-  .viewer canvas{display:block;max-width:none;background:#fff;box-shadow:0 8px 30px rgba(0,0,0,.4)}
+  .viewer canvas{display:block;max-width:none;background:#fff;box-shadow:0 8px 30px rgba(27,25,22,.16)}
   .viewer video,.viewer img{max-width:100%;max-height:70vh;display:block;margin:auto}
   .viewer .wmgrid{position:absolute;inset:0;pointer-events:none;display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:170px;overflow:hidden}
-  .viewer .wmgrid span{transform:rotate(-30deg);align-self:center;justify-self:center;white-space:nowrap;font-size:12.5px;letter-spacing:.1em;font-weight:600;color:rgba(223,220,201,.16)}
+  .viewer .wmgrid span{transform:rotate(-30deg);align-self:center;justify-self:center;white-space:nowrap;font-size:12.5px;letter-spacing:.1em;font-weight:600;color:rgba(12,14,30,.10)}
   .vbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
   .vbar .num{color:var(--muted);font-size:13px;min-width:92px;text-align:center}
   .upload{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:16px 18px}
   .drop{grid-column:1/-1;border:1px dashed var(--line-2);border-radius:8px;padding:18px;display:flex;align-items:center;gap:14px;justify-content:space-between;flex-wrap:wrap;background:var(--raise)}
   .drop input[type=file]{color:var(--muted);font-size:13px;max-width:100%}
   .switch-row{grid-column:1/-1;display:flex;gap:12px;align-items:flex-start;font-size:14px;cursor:pointer}
-  .switch-row input{width:17px;height:17px;margin-top:3px;accent-color:#dfdcc9;flex:0 0 auto}
+  .switch-row input{width:17px;height:17px;margin-top:3px;accent-color:#1b1916;flex:0 0 auto}
   .switch-row span{color:var(--dim);font-size:12.5px;display:block}
   .files{display:flex;flex-direction:column}
   .frow{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:14px;align-items:center;padding:14px 22px;border-top:1px solid var(--line)}
@@ -425,7 +426,7 @@
   .nda .nsec.guard p{color:var(--dim)}
   .nend{max-width:68ch;margin:30px auto 0;display:flex;align-items:center;gap:10px;padding:14px 18px;border:1px dashed var(--line-2);border-radius:8px;font-size:13px;color:var(--dim);transition:color .2s,border-color .2s}
   .nend svg{width:16px;height:16px;flex:0 0 auto}
-  .ndoc.read .nend{color:var(--ok);border-color:rgba(148,194,163,.35);border-style:solid;background:var(--ok-bg)}
+  .ndoc.read .nend{color:var(--ok);border-color:rgba(63,122,82,.35);border-style:solid;background:var(--ok-bg)}
   .ndoc.read .ndoc-bar i{background:var(--ok)}
   .sched{width:100%;border-collapse:collapse;font-size:13.5px;min-width:0}
   .sched th{width:42%;background:transparent;text-transform:none;letter-spacing:0;font-size:13px;color:var(--muted);font-weight:500;padding:11px 14px;border-bottom:1px solid var(--line)}
@@ -690,7 +691,7 @@
 
   /* ================= AUTH SCREENS ================= */
   const authShell = (left, right) => `<div class="auth">
-      <section class="auth-l"><canvas id="grain" aria-hidden="true"></canvas><div class="wordmark">VANTEDGE</div>${left}<div class="tag">Earn Your AdVANTEDGE</div></section>
+      <section class="auth-l"><canvas id="grain" aria-hidden="true"></canvas><div class="wordmark"><svg class="wm-mark" viewBox="0 0 432 432" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M0 0H346A86 86 0 0 1 432 86V432H86A86 86 0 0 1 0 346V0ZM0 0A432 432 0 0 1 432 432A432 432 0 0 1 0 0Z"/></svg>VANTEDGE</div>${left}</section>
       <section class="auth-r"><div class="auth-card">${right}</div></section></div>`;
   const authLeft = `<div><span class="label" style="color:var(--cream)">Member Portal</span><h1>Your desk, your materials, one login.</h1>
       <p>Handbooks, templates and training live here instead of a shared Drive. Access is personal and closes the day you leave the team.</p></div>`;
@@ -760,7 +761,7 @@
         const dx = xx - r.width*0.85, dy = yy - r.height*0.15;
         const a = Math.max(0, 0.5 - (Math.sqrt(dx*dx+dy*dy) / Math.max(r.width, r.height))*0.75);
         if(a <= 0.02) continue;
-        x.fillStyle = `rgba(223,220,201,${a.toFixed(3)})`; x.beginPath(); x.arc(xx, yy, 0.9, 0, Math.PI*2); x.fill();
+        x.fillStyle = `rgba(27,25,22,${(a*0.7).toFixed(3)})`; x.beginPath(); x.arc(xx, yy, 0.9, 0, Math.PI*2); x.fill();
       }
     }
   }
@@ -796,7 +797,7 @@
     const cur = admin ? S.adminTab : S.tab;
     return `<div class="shell">
       <aside class="side">
-        <div class="brand"><div class="wordmark">VANTEDGE</div><span class="label">${admin?'Admin console':'Member portal'}</span></div>
+        <div class="brand"><div class="wordmark"><svg class="wm-mark" viewBox="0 0 432 432" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M0 0H346A86 86 0 0 1 432 86V432H86A86 86 0 0 1 0 346V0ZM0 0A432 432 0 0 1 432 432A432 432 0 0 1 0 0Z"/></svg>VANTEDGE</div><span class="label">${admin?'Admin console':'Member portal'}</span></div>
         ${S.isAdmin ? `<div class="modes" role="group" aria-label="Switch view">
           <button type="button" data-mode="member" aria-pressed="${!admin}">Member</button>
           <button type="button" data-mode="admin" aria-pressed="${admin}">Admin</button></div>` : ''}
@@ -1182,7 +1183,7 @@ performance or other equitable relief for any actual or threatened breach, witho
     const pad = $('#pad'), ctx = c.getContext('2d');
     const r = pad.getBoundingClientRect(), dpr = window.devicePixelRatio||1;
     c.width = Math.max(1, r.width*dpr); c.height = Math.max(1, r.height*dpr); ctx.setTransform(dpr,0,0,dpr,0,0);
-    ctx.lineWidth = 2; ctx.lineCap='round'; ctx.lineJoin='round'; ctx.strokeStyle='#dfdcc9'; ctx.fillStyle='#dfdcc9';
+    ctx.lineWidth = 2; ctx.lineCap='round'; ctx.lineJoin='round'; ctx.strokeStyle='#0c0e1e'; ctx.fillStyle='#0c0e1e';
     strokes = 0; let down=false, last=null;
     const pt = ev => { const b=c.getBoundingClientRect(); return {x:ev.clientX-b.left, y:ev.clientY-b.top}; };
     c.addEventListener('pointerdown', ev => { down=true; last=pt(ev); try{ c.setPointerCapture(ev.pointerId); }catch(e){} $('#padHint').hidden=true; ctx.beginPath(); ctx.arc(last.x,last.y,1,0,Math.PI*2); ctx.fill(); strokes++; });
