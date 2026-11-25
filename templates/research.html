@@ -6,7 +6,7 @@
   /* ---------- Research header (62:50) ---------- */
   .r-head .frame{padding:200px 80px 96px;display:flex;flex-direction:column;gap:20px}
   .r-head .kick{font-size:13px;letter-spacing:3.12px;text-transform:uppercase;color:var(--stone-700);line-height:normal}
-  .r-head h1{font-family:var(--inter);font-weight:600;font-size:72px;line-height:1.05;letter-spacing:-2.52px}
+  .r-head h1{font-family:var(--display);font-weight:700;font-size:60px;line-height:1.05;letter-spacing:-1.5px}
   .r-head p{font-size:22px;line-height:1.55;color:var(--stone-750)}
 
   /* ---------- Research content (62:67) ---------- */
@@ -15,12 +15,12 @@
   .chip{font-size:14px;line-height:normal;padding:10px 18px;border-radius:999px;border:1px solid var(--stone-400);color:var(--ink);transition:background .2s,border-color .2s,color .2s}
   .chip:hover{border-color:var(--stone-750)}
   .chip[aria-pressed="true"]{background:var(--stone-750);border-color:var(--stone-750);color:var(--paper)}
-  .grid{display:grid;grid-template-columns:repeat(3,minmax(0,405px));gap:32px;justify-content:space-between}
-  .report{display:flex;flex-direction:column;background:var(--paper);border:1px solid var(--stone-300);border-radius:12px;overflow:hidden;box-shadow:0 8px 24px -4px rgba(12,14,30,.05);transition:transform .3s ease,box-shadow .3s ease}
+  .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px}
+  .report{display:flex;flex-direction:column;background:var(--paper);border:0;border-radius:14px;overflow:hidden;box-shadow:0 8px 24px -4px rgba(12,14,30,.05);transition:transform .3s ease,box-shadow .3s ease}
   .report:hover{transform:translateY(-3px);box-shadow:0 14px 32px -6px rgba(12,14,30,.1)}
   .report[hidden]{display:none}
-  .stage{height:280px;flex:none;background:#ece9e1;display:grid;place-items:center}
-  .stage img{width:168px;height:238px;object-fit:cover;object-position:top;box-shadow:0 10px 22px -4px rgba(12,14,30,.14);transition:transform .4s ease}
+  .stage{height:330px;flex:none;background:#ece9e1;display:grid;place-items:center}
+  .stage img{width:200px;height:283px;object-fit:cover;object-position:top;box-shadow:0 10px 22px -4px rgba(12,14,30,.14);transition:transform .4s ease}
   .report:hover .stage img{transform:scale(1.03)}
   .r-text{padding:24px 26px 28px;display:flex;flex-direction:column;gap:12px}
   .r-text .tag{font-size:12px;letter-spacing:2.16px;text-transform:uppercase;color:var(--stone-700);line-height:normal}
@@ -34,7 +34,15 @@
   .show-more:hover{background:var(--ink);color:var(--paper);border-color:var(--ink)}
   .show-more[hidden]{display:none}
 
-  @media (max-width:1439px){ .grid{grid-template-columns:repeat(3,minmax(0,1fr))} }
+  /* Desktop: 70% scale, same as the Partnerships page and homepage sections */
+  @media (min-width:901px){
+    /* 70% scale, but full width: 114px at .7 = 80px on screen, lining up with the logo in the nav */
+    .r-head .frame,.r-body .frame{zoom:.7;max-width:2057px}
+    .r-head .frame{padding:170px 114px 48px}
+    .r-body .frame{padding:0 114px 120px;gap:36px}
+  }
+
+  @media (max-width:1280px){ .grid{grid-template-columns:repeat(3,minmax(0,1fr))} }
   @media (max-width:1100px){ .grid{grid-template-columns:repeat(2,minmax(0,1fr))} }
   @media (max-width:900px){
     .r-head .frame{padding:120px 24px 48px}
@@ -49,7 +57,7 @@
 {% block content %}
 <section class="r-head">
   <div class="frame">
-    <span class="kick">Research</span>
+    <span class="kick">Portfolio</span>
     <h1>Research</h1>
     <p>Published analysis from Vantedge members.</p>
   </div>
@@ -89,7 +97,7 @@
 {% block body_end %}
 <script>
   (function(){
-    const PAGE = 9;
+    const PAGE = 8;   // two rows of 4
     const cards = [...document.querySelectorAll('#reportGrid .report')];
     const chips = [...document.querySelectorAll('.chip')];
     const count = document.getElementById('reportCount');

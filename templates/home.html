@@ -1,5 +1,5 @@
 {% extends 'layout.html' %}
-{% block title %}Vantedge — Building the talent infrastructure for finance{% endblock %}
+{% block title %}Vantedge{% endblock %}
 {% block styles %}
 <style>
   /* ---------- Hero (19:110) ---------- */
@@ -7,7 +7,8 @@
   .hero .frame{position:static;height:1024px;display:flex}
   /* Video fills the whole first screen; fades keep the copy readable and blend into the next section */
   .hero-photo{position:absolute;inset:0;overflow:hidden;background:var(--stone-50)}
-  .hero-photo video{display:block;width:100%;height:100%;object-fit:cover;object-position:center 40%;filter:grayscale(1) brightness(1.05)}
+  .hero-photo video{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;object-position:center 40%;filter:grayscale(1) brightness(1.05);opacity:0;transition:opacity 1s ease;will-change:opacity;transform:translateZ(0)}
+  .hero-photo video.on{opacity:1}
   .hero-photo .wash{position:absolute;inset:0;background:linear-gradient(127.3deg,rgba(27,25,22,0) 30%,rgba(27,25,22,.18) 60%,rgba(27,25,22,.45) 100%)}
   .hero-photo .fl{position:absolute;inset:0;background:linear-gradient(90deg,#f5f3ee 0%,rgba(245,243,238,.96) 22%,rgba(245,243,238,.82) 36%,rgba(245,243,238,.5) 50%,rgba(245,243,238,.18) 64%,rgba(245,243,238,0) 78%)}
   .hero-photo .fb{position:absolute;left:0;right:0;bottom:0;height:300px;background:linear-gradient(180deg,rgba(245,243,238,0) 0%,rgba(245,243,238,.6) 45%,#f5f3ee 85%,#f5f3ee 100%)}
@@ -56,11 +57,43 @@
   /* ---------- What we do (32:57) ---------- */
   .wwd{position:relative;background:var(--stone-50);overflow:hidden}
   .wwd .frame{height:1024px;display:flex}
-  .wwd .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .wwd .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1)}
   .wwd .wash{position:absolute;inset:0;background:linear-gradient(90deg,rgba(27,25,22,.5) 0%,rgba(27,25,22,.15) 45%,rgba(27,25,22,0) 100%)}
   .wwd .fr{position:absolute;top:0;bottom:0;right:0;width:calc(980px + max(0px, (100% - 1440px) / 2));background:linear-gradient(90deg,rgba(245,243,238,0) 0%,rgba(245,243,238,.4) 22%,rgba(245,243,238,.88) 50%,rgba(245,243,238,.95) 100%)}
   .wwd .ft{position:absolute;top:0;left:0;right:0;height:220px;background:linear-gradient(180deg,#f5f3ee 0%,#f5f3ee 22%,rgba(245,243,238,.6) 55%,rgba(245,243,238,0) 100%)}
   .wwd .fb{position:absolute;bottom:0;left:0;right:0;height:200px;background:linear-gradient(180deg,rgba(245,243,238,0),#f5f3ee)}
+  /* Glass graphic (designed, no photo): ink orbs seen through frosted panes */
+  .gx{position:absolute;top:0;bottom:0;left:50%;width:1440px;margin-left:-720px}
+  .gx .orb{position:absolute;border-radius:50%;filter:blur(28px)}
+  .gx .o1{left:120px;top:250px;width:360px;height:360px;background:radial-gradient(circle at 40% 40%,#0c0e1e 0%,rgba(12,14,30,.75) 45%,rgba(12,14,30,0) 72%)}
+  .gx .o2{left:430px;top:560px;width:300px;height:300px;background:radial-gradient(circle,#3a3833 0%,rgba(58,56,51,.6) 45%,rgba(58,56,51,0) 72%)}
+  .gx .o3{left:-60px;top:620px;width:340px;height:340px;background:radial-gradient(circle,rgba(12,14,30,.85) 0%,rgba(12,14,30,.4) 45%,rgba(12,14,30,0) 72%)}
+  .gx .o4{left:520px;top:170px;width:180px;height:180px;background:radial-gradient(circle,rgba(94,90,82,.9) 0%,rgba(94,90,82,0) 70%)}
+  .gx .pane{position:absolute;border-radius:28px;background:linear-gradient(140deg,rgba(255,255,255,.62) 0%,rgba(255,255,255,.18) 55%,rgba(255,255,255,.08) 100%);
+    -webkit-backdrop-filter:blur(22px) saturate(120%);backdrop-filter:blur(22px) saturate(120%);
+    border:1px solid rgba(255,255,255,.75);box-shadow:inset 0 1px 0 rgba(255,255,255,.9),inset 0 -1px 0 rgba(255,255,255,.25),0 30px 60px rgba(12,14,30,.12);
+    animation:gxfloat 14s ease-in-out infinite}
+  .gx .pane::after{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(115deg,rgba(255,255,255,0) 30%,rgba(255,255,255,.45) 42%,rgba(255,255,255,0) 54%)}
+  .gx .p1{left:150px;top:190px;width:300px;height:420px;transform:rotate(-14deg)}
+  .gx .p2{left:360px;top:440px;width:260px;height:260px;transform:rotate(12deg);animation-delay:-4s}
+  .gx .p3{left:40px;top:560px;width:230px;height:300px;transform:rotate(8deg);animation-delay:-8s}
+  .gx .p4{left:470px;top:150px;width:150px;height:200px;border-radius:22px;transform:rotate(-6deg);animation-delay:-2s}
+  .gx .p5{left:300px;top:760px;width:180px;height:120px;border-radius:20px;transform:rotate(-18deg);animation-delay:-10s}
+  @keyframes gxfloat{0%,100%{translate:0 0}50%{translate:0 -14px}}
+  @media (prefers-reduced-motion:reduce){.gx .pane{animation:none}}
+  /* Dark variant: glass-panes render, text on the dark right side */
+  .wwd.dark{background:#141311}
+  .wwd.dark .bg{object-position:left center}
+  .wwd.dark .wash,.wwd.dark .fr{display:none}
+  .wwd.dark .ft{height:160px;background:linear-gradient(180deg,#f5f3ee 0%,rgba(245,243,238,.55) 35%,rgba(245,243,238,0) 100%)}
+  .wwd.dark .fb{height:160px}
+  .wwd.dark .label span{color:rgba(236,233,224,.7)}
+  .wwd.dark .label i{background:rgba(236,233,224,.35)}
+  .wwd.dark h2{color:var(--cream)}
+  .wwd.dark p{color:rgba(236,233,224,.72)}
+  .wwd.dark .ulink{color:var(--cream);border-color:rgba(236,233,224,.4)}
+  .wwd.dark .ulink:hover{border-color:var(--cream)}
+  .wwd.dark .ulink img{filter:invert(1)}
   .wwd-copy{position:relative;flex:1;display:flex;flex-direction:column;justify-content:center;padding:110px 80px 110px 760px}
   .label{display:flex;align-items:center;gap:16px}
   .label span{font-weight:700;font-size:13px;letter-spacing:2.6px;text-transform:uppercase;color:var(--stone-700);line-height:normal}
@@ -75,6 +108,10 @@
   .ticker{position:relative;width:100%;height:40px;overflow:hidden}
   .track{position:absolute;top:4px;left:0;display:flex;align-items:center;gap:48px;width:max-content;animation:tick 40s linear infinite}
   .track img{height:32px;object-fit:contain}
+  /* strip sits inside the bottom of "What we do" */
+  .wwd .unis{position:absolute;left:0;right:0;bottom:44px;z-index:1;background:none}
+  .wwd .unis .ticker{-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+  @media (max-width:900px){ .wwd .unis{position:relative;bottom:auto;padding:0 0 48px} }
   @keyframes tick{to{transform:translateX(calc(-50% - 24px))}}
 
   /* ---------- Leadership (50:51) ---------- */
@@ -112,7 +149,16 @@
   .about h2{position:absolute;left:76px;top:226px;font-family:var(--display);font-weight:700;font-size:64px;line-height:1.06;letter-spacing:-1.92px;white-space:nowrap}
   .glass{position:absolute;top:580px;width:376px;height:250px;border-radius:14px;overflow:hidden;
     background:rgba(201,199,195,.55);border:1px solid rgba(255,253,248,.7);-webkit-backdrop-filter:blur(22px);backdrop-filter:blur(22px);
-    box-shadow:0 16px 40px rgba(13,13,26,.08)}
+    box-shadow:0 16px 40px rgba(13,13,26,.08);
+    transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s ease,background-color .35s ease,border-color .35s ease}
+  /* hover: lift, brighten the glass, and sweep a soft light across */
+  .glass::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .35s ease;
+    background:radial-gradient(420px circle at var(--mx,50%) var(--my,0%),rgba(255,255,255,.45),rgba(255,255,255,0) 60%)}
+  .glass:hover{transform:translateY(-8px);background-color:rgba(236,233,224,.72);border-color:rgba(255,255,255,.95);box-shadow:0 30px 60px rgba(13,13,26,.16)}
+  .glass:hover::before{opacity:1}
+  .glass .eyebrow{transition:color .35s ease}
+  .glass:hover .eyebrow{color:var(--ink)}
+  @media (prefers-reduced-motion:reduce){ .glass,.glass::before{transition:none} .glass:hover{transform:none} }
   .glass.g1{left:80px}.glass.g2{left:532px}.glass.g3{left:984px}
   .glass .in{position:absolute;left:27px;top:29px;display:flex;flex-direction:column}
   .glass .eyebrow{font-size:11px}
@@ -120,33 +166,10 @@
   .glass p{margin-top:18px;width:210px;font-size:14px;line-height:1.55;color:rgba(12,14,30,.85)}
   .about .vision{position:absolute;left:80px;top:904px;font-size:22px;line-height:1.35;letter-spacing:-.11px;white-space:nowrap}
 
-  /* ---------- Partners (53:51) ---------- */
-  .partners{background:var(--stone-50)}
-  .partners .frame{padding:110px 80px}
-  /* Partner universities shown at 70% scale, like Get in touch */
-  @media (min-width:901px){ .partners .frame{zoom:.7;max-width:1440px} }
   /* Leadership and About shown at 70% scale too (photo backgrounds stay full size) */
-  @media (min-width:901px){ .about .frame{zoom:.7;max-width:1440px} .advisors .frame{zoom:.85;max-width:1440px} }
-  .p-head{display:flex;flex-direction:column;gap:16px}
-  .p-head .kick{font-size:13px;letter-spacing:3.12px;text-transform:uppercase;color:var(--stone-750);line-height:normal}
-  .p-head h2{font-family:var(--inter);font-weight:600;font-size:52px;line-height:1.1;letter-spacing:-1.56px}
-  .p-head p{width:820px;font-size:20px;line-height:1.55;color:var(--stone-750)}
-  .chapters{margin-top:48px;display:flex;gap:32px}
-  .chapter{flex:1 0 0;min-width:0;background:var(--paper);border-radius:12px;overflow:hidden;box-shadow:0 10px 28px -4px rgba(12,14,30,.06)}
-  .campus{position:relative;height:300px;overflow:hidden}
-  .campus img{width:100%;height:100%;object-fit:cover}
-  .tag{position:absolute;top:24px;right:24px;background:var(--stone-750);color:var(--paper);font-size:12px;letter-spacing:2.4px;text-transform:uppercase;padding:9px 16px;line-height:normal}
-  .ch-body{height:410px;padding:36px 40px 32px;display:flex;flex-direction:column;gap:24px}
-  .identity{display:flex;align-items:center;gap:16px}
-  .tile{width:60px;height:60px;border-radius:8px;border:1px solid var(--stone-300);background:var(--paper);display:grid;place-items:center;flex:none}
-  .tile img{width:46px;height:46px;object-fit:cover}
-  .identity h3{font-family:var(--inter);font-weight:600;font-size:24px;letter-spacing:-.36px;line-height:normal}
-  .identity span{display:block;margin-top:2px;font-size:16px;letter-spacing:.48px;color:var(--stone-700);line-height:normal}
-  .ch-body > p{font-size:17px;line-height:1.65}
-  .join{display:flex;justify-content:center;width:100%;padding:18px 0;border-radius:999px;background:var(--stone-750);color:var(--paper);font-family:var(--inter);font-weight:500;font-size:14px;letter-spacing:2.8px;text-transform:uppercase;line-height:normal;transition:background .2s}
-  .join:hover{background:var(--graphite)}
-  .ch-body .note{font-size:14px;color:var(--stone-700);text-align:center;line-height:normal}
-  .ch-body .note b{font-weight:400;color:var(--ink)}
+  @media (min-width:901px){ .about .frame{zoom:.7;max-width:1440px} .advisors .frame{zoom:.85;max-width:1440px}
+    /* section is zoomed to .7, so scale the heading back up to match the hero (~62px on screen) */
+    .about h2{font-size:88px;letter-spacing:-2.64px} .about .kick{font-size:17px;letter-spacing:4px;top:180px} }
 
   /* ---------- Contact (297:197) ---------- */
   .contact{background:#f5f3ee}
@@ -263,11 +286,6 @@
     .adv .more{margin-top:12px}
     .glass{max-width:none}
     .about .vision{font-size:19px}
-    .partners .frame{padding:72px 24px}
-    .p-head h2{font-size:36px}
-    .p-head p{width:auto;font-size:17px}
-    .chapters{flex-direction:column}
-    .ch-body{height:auto;padding:28px 24px}
     .contact .frame{padding:72px 24px}
     .form-card{padding:32px 24px}
     .form-card h2{font-size:34px}
@@ -278,7 +296,6 @@
   }
   /* Phone fixes */
   @media (max-width:900px){
-    .chapter{flex:none}
     .wwd .fr{background:linear-gradient(90deg,rgba(245,243,238,.55) 0%,rgba(245,243,238,.9) 35%,rgba(245,243,238,.95) 100%)}
     .wwd .wash{background:rgba(27,25,22,.08)}
     .greg .bio{text-align:left}
@@ -293,6 +310,18 @@
     .about .vision br{display:none}
   }
   @media (prefers-reduced-motion:reduce){ .track{animation:none} html{scroll-behavior:auto} }
+  /* Phone polish (latest changes) */
+  @media (max-width:900px){
+    .glass{height:auto}
+    .glass .in{position:relative;left:auto;top:auto;padding:26px 24px 28px}
+    .glass h3,.glass p{width:auto}
+    .wwd .frame{min-height:0}
+    .wwd-copy{padding:72px 24px 48px}
+    .wwd .bg{object-position:22% center}
+    .wwd .fr{background:linear-gradient(180deg,rgba(245,243,238,.2) 0%,rgba(245,243,238,.72) 38%,rgba(245,243,238,.8) 100%)}
+    .wwd .wash{background:none}
+    .wwd .unis{padding-bottom:64px}
+  }
 </style>
 {% endblock %}
 {% block content %}
@@ -301,7 +330,9 @@
 <section class="hero">
   <div class="frame">
     <div class="hero-photo" aria-hidden="true">
-      <video src="{{ url_for('static', filename='hero.mp4') }}" poster="{{ S }}hero.png" autoplay muted loop playsinline preload="auto"></video>
+      <video class="hero-clip on" src="{{ url_for('static', filename='hero-1.mp4') }}" data-src-4k="{{ url_for('static', filename='hero-1-4k.mp4') }}" autoplay muted playsinline preload="auto"></video>
+      <video class="hero-clip" src="{{ url_for('static', filename='hero-2.mp4') }}" muted playsinline preload="auto"></video>
+      <video class="hero-clip" src="{{ url_for('static', filename='hero-3.mp4') }}" data-src-4k="{{ url_for('static', filename='hero-3-4k.mp4') }}" muted playsinline preload="auto"></video>
       <div class="wash"></div><div class="fl"></div><div class="fb"></div><div class="ft"></div>
     </div>
     <div class="hero-copy">
@@ -346,7 +377,7 @@
       </div>
     </a>
     <a class="path stu" href="{{ waitlist_url }}">
-      <img class="photo" src="{{ S }}card-students.png" alt="" />
+      <img class="photo" src="{{ S }}card-students-campus.jpg" alt="" />
       <div class="pfade"></div>
       <div class="content">
         <div class="txt">
@@ -361,9 +392,10 @@
 </section>
 
 <!-- ================= WHAT WE DO ================= -->
+{% set unis = [('cambridge','University of Cambridge',154),('bocconi','Bocconi University',91),('lse','London School of Economics',89),('ucl','UCL',57),('kcl',"King's College London",48),('essec','ESSEC',34),('warwick','Warwick Business School',32),('nyu-stern','NYU Stern',36),('hec-paris','HEC Paris',71),('escp','ESCP',69)] %}
 <section class="wwd" id="what-we-do">
   <div class="backdrop" aria-hidden="true">
-    <img class="bg" src="{{ S }}wwd.png" alt="" aria-hidden="true" />
+    <img class="bg" src="{{ S }}wwd-curve.jpg" alt="" aria-hidden="true" />
     <div class="wash"></div><div class="fr"></div><div class="ft"></div><div class="fb"></div>
   </div>
   <div class="frame">
@@ -374,18 +406,16 @@
       <a class="ulink" href="#about">Learn More{{ ink_arrow }}</a>
     </div>
   </div>
-</section>
-
-<!-- ================= UNIVERSITY STRIP ================= -->
-{% set unis = [('cambridge','University of Cambridge',154),('bocconi','Bocconi University',91),('lse','London School of Economics',89),('ucl','UCL',57),('kcl',"King's College London",48),('essec','ESSEC',34),('warwick','Warwick Business School',32),('nyu-stern','NYU Stern',36),('hec-paris','HEC Paris',71),('escp','ESCP',69)] %}
-<section class="unis" aria-label="Where our members study">
-  <h4>Where our members study</h4>
-  <div class="ticker">
-    <div class="track">
-      {% for loop_n in [0,1] %}{% for slug,name,w in unis %}<img src="{{ S }}uni-{{ slug }}.png" alt="{{ name if loop_n == 0 else '' }}" style="width:{{ w }}px"{% if loop_n %} aria-hidden="true"{% endif %} />{% endfor %}{% endfor %}
+  <div class="unis" role="region" aria-label="Where our students study">
+    <h4>Where our students study</h4>
+    <div class="ticker">
+      <div class="track">
+        {% for loop_n in [0,1] %}{% for slug,name,w in unis %}<img src="{{ S }}uni-{{ slug }}.png" alt="{{ name if loop_n == 0 else '' }}" style="width:{{ w }}px"{% if loop_n %} aria-hidden="true"{% endif %} />{% endfor %}{% endfor %}
+      </div>
     </div>
   </div>
 </section>
+
 
 <!-- ================= LEADERSHIP ================= -->
 <section class="advisors" id="advisor">
@@ -409,7 +439,7 @@
           <img src="{{ S }}adv-xuenna.png" alt="Xuenna Aw" />
           <div class="profile">
             <span class="name">Xuenna Aw</span>
-            <span class="role">Founder &amp; CEO, Vantedge</span>
+            <span class="role">Founder, Vantedge</span>
             <p class="bio">Xuenna leads strategy, direction, and global expansion across Europe, APAC, and North America at Vantedge, building the talent infrastructure for finance to fix a broken early-career recruitment pipeline. Previously in Mergers and Acquisitions at PwC, she saw firsthand how outdated the barrier to entry is for aspiring analysts, driving her focus on replacing passive résumé screening with real-world proof of capability.</p>
             <span class="more">Read full bio<img src="{{ S }}arrow-ink-sm.svg" alt="" /></span>
           </div>
@@ -451,38 +481,7 @@
       <div class="glass g2"><div class="in"><span class="eyebrow">Our approach</span><h3>A more complete<br>view of talent.</h3><p>We’re building a platform where finance talent can demonstrate ability through real work.</p></div></div>
       <div class="glass g3"><div class="in"><span class="eyebrow">Where we are today</span><h3>Working towards<br>greater access.</h3><p>Partnering with students and finance employers to shape a more practical approach.</p></div></div>
     </div>
-    <p class="vision">Our vision is to make demonstrated ability<br>a more meaningful part of how finance hires.</p>
-  </div>
-</section>
-
-<!-- ================= PARTNERS ================= -->
-<section class="partners" id="partners">
-  <div class="frame">
-    <div class="p-head">
-      <span class="kick">Chapters</span>
-      <h2>Partner universities</h2>
-      <p>Our on-the-ground chapters running local events, research, and recruitment.</p>
-    </div>
-    <div class="chapters">
-      <article class="chapter">
-        <div class="campus"><img src="{{ S }}campus-bocconi.png" alt="Milan Cathedral square" /><span class="tag">Founding chapter · Milan, Italy</span></div>
-        <div class="ch-body">
-          <div class="identity"><span class="tile"><img src="{{ S }}logo-bocconi.png" alt="Bocconi logo" /></span><div><h3>Bocconi University</h3><span>Europe Research Hub</span></div></div>
-          <p>As our founding chapter, Bocconi University serves as the central operational hub for Vantedge in Europe. We run local in-person events, workshops, and networking sessions on campus, allowing students to connect face-to-face while collaborating with our wider global research team.</p>
-          <a class="join" href="{{ waitlist_url }}">Interested to join?</a>
-          <p class="note">Select <b>Bocconi</b> in the application drop-down so we route you to the correct chapter lead.</p>
-        </div>
-      </article>
-      <article class="chapter">
-        <div class="campus"><img src="{{ S }}campus-bath.png" alt="Pulteney Bridge, Bath" /><span class="tag">Established chapter · United Kingdom</span></div>
-        <div class="ch-body">
-          <div class="identity"><span class="tile"><img src="{{ S }}logo-bath.png" alt="University of Bath logo" /></span><div><h3>University of Bath</h3><span>UK Research Hub</span></div></div>
-          <p>Our Bath Chapter powers Vantedge's presence and research initiatives in the UK. If you're a student at the University of Bath looking to gain hands-on corporate finance experience, contribute to cross-border research, or lead local campus initiatives, our UK team is actively recruiting.</p>
-          <a class="join" href="{{ waitlist_url }}">Interested to join?</a>
-          <p class="note">Select <b>Bath</b> in the application drop-down so we route you to the correct chapter lead.</p>
-        </div>
-      </article>
-    </div>
+    <p class="vision">Our vision is to make demonstrated ability <br>a more meaningful part of how finance hires.</p>
   </div>
 </section>
 
@@ -543,8 +542,8 @@
     "At Vantedge, Gregory works closely with the team as a strategic sounding board, drawing on his extensive experience in corporate finance and M&A to provide practical perspectives, challenge ideas and share insights from real-world transactions. He also lends his expertise to the development of Vantedge's initiatives, helping ensure that our approach is grounded in industry realities and informed by the perspectives of an experienced practitioner."]},
   'mayur': {'img':'pop-mayur.png','k':'Board advisor','n':'Mayur Tejwani','r':'Ex-McKinsey, JPMorgan | Chartered Accountant & Esade MBA','p':[
     "Mayur Tejwani is a strategy and M&A professional with a Chartered Accountant qualification and an MBA from Esade. He leads M&A and value creation at a deeptech healthcare company in Barcelona. Prior to that, he spent more than four years at McKinsey advising banks and corporates on strategy, investment banking, and sustainability, and two years at JPMorgan building financial models. Most at home where a valuation has to hold up in front of a buyer, he works across Europe and the GCC. At Vantedge, he leverages his consulting and strategy background to support our team by stress-testing and validating our ideas and execution."]},
-  'xuenna': {'img':'pop-xuenna.png','k':'Founder & CEO','n':'Xuenna Aw','r':'Founder & CEO, Vantedge','p':[
-    "As Founder and CEO, Xuenna leads strategy, direction, and global expansion across Europe, APAC, and North America at Vantedge, building the talent infrastructure for finance to fix a broken early-career recruitment pipeline. Previously in Mergers and Acquisitions at PwC, she saw firsthand how outdated the barrier to entry is for aspiring analysts, driving her focus on replacing passive résumé screening with real-world proof of capability."]}
+  'xuenna': {'img':'pop-xuenna.png','k':'Founder','n':'Xuenna Aw','r':'Founder, Vantedge','p':[
+    "As Founder, Xuenna leads strategy, direction, and global expansion across Europe, APAC, and North America at Vantedge, building the talent infrastructure for finance to fix a broken early-career recruitment pipeline. Previously in Mergers and Acquisitions at PwC, she saw firsthand how outdated the barrier to entry is for aspiring analysts, driving her focus on replacing passive résumé screening with real-world proof of capability."]}
 } %}
 {% for key, b in bios.items() %}
 <div class="modal" id="bio-{{ key }}" role="dialog" aria-modal="true" aria-labelledby="bio-{{ key }}-name">
@@ -561,6 +560,32 @@
 {% endfor %}
 
 <script>
+  // Hero: play the clips in turn, sped up, crossfading and looping.
+  // Big/high-density screens on a normal connection get the 4K version of clip 1.
+  (function(){
+    const clips=[...document.querySelectorAll('.hero-clip')]; if(clips.length<2) return;
+    const SPEEDS=[1.5,1,1], FADE=1.0;   // Petronas sped up; Chicago and New York at normal speed
+    const rate=v=>SPEEDS[clips.indexOf(v)]||1;
+    const conn=navigator.connection||{};
+    const big=Math.max(screen.width,screen.height)*(devicePixelRatio||1)>=2400;
+    if (big && !conn.saveData && !/(^|-)2g|3g/.test(conn.effectiveType||'')) clips.forEach(v=>{ const k=v.getAttribute('data-src-4k'); if(k){ v.src=k; v.load(); v.play().catch(()=>{}); } });
+    clips.forEach(v=>{ v.defaultPlaybackRate=rate(v); v.playbackRate=rate(v); v.addEventListener('play',()=>{ v.playbackRate=rate(v); }); });
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches){ clips[0].loop=true; return; }
+    let cur=0, switching=false;
+    function next(){
+      const a=clips[cur], n=(cur+1)%clips.length, b=clips[n];
+      if (switching || b.readyState<3) return;   // wait until the next clip can play smoothly
+      switching=true;
+      b.currentTime=0; b.playbackRate=rate(b); const p=b.play(); if(p&&p.catch) p.catch(()=>{});
+      b.classList.add('on'); a.classList.remove('on');
+      setTimeout(()=>{ a.pause(); cur=n; switching=false; }, FADE*1000);
+    }
+    clips.forEach(v=>{
+      v.addEventListener('timeupdate',()=>{ if(v===clips[cur] && v.duration && (v.duration-v.currentTime)/rate(v)<FADE) next(); });
+      v.addEventListener('ended',()=>{ if(v===clips[cur]){ next(); if(!switching){ v.currentTime=0; v.play().catch(()=>{}); } } });
+    });
+  })();
+
   // Count-up stats (Figma counter animation)
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const statIO = new IntersectionObserver(es => es.forEach(e => {
@@ -622,5 +647,12 @@
   });
 
 
+</script>
+<script>
+  document.querySelectorAll('.about .glass').forEach(g => g.addEventListener('mousemove', e => {
+    const r = g.getBoundingClientRect();
+    g.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
+    g.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
+  }));
 </script>
 {% endblock %}

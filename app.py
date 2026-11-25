@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for
+from flask import Flask, render_template, redirect, url_for, send_from_directory
 import json
 import os
 
@@ -35,6 +35,8 @@ def page(template, **ctx):
         booking_url=SITE["booking_url"],
         home=url_for("home"),
         research_url=url_for("research"),
+        partners_url=url_for("partnerships"),
+        faq_url=url_for("faq"),
         **ctx,
     )
 
@@ -53,6 +55,18 @@ def research():
                 division_labels=DIVISION_LABELS, type_labels=TYPE_LABELS)
 
 
+@app.route("/partnerships")
+def partnerships():
+    """Partnerships page — partner university chapters (moved off the homepage)."""
+    return page("partnerships.html")
+
+
+@app.route("/faq")
+def faq():
+    """FAQ page — questions from firms and candidates."""
+    return page("faq.html")
+
+
 @app.route("/waitlist")
 def waitlist():
     """Waitlist page — Tally form styled like the homepage 'Get in touch' card."""
@@ -64,29 +78,31 @@ def portal():
     return render_template("portal.html")
 
 
+@app.route("/favicon.ico")
+def favicon():
+    """Browsers and Google look for /favicon.ico at the site root."""
+    return send_from_directory(os.path.join(BASE_DIR, "static"), "favicon.ico", mimetype="image/x-icon")
+
+
 # ── Old pages from the previous site: send visitors to the matching place on the new site
 OLD_URLS = {
     "/about": "/#about", "/our-story": "/#about",
-    "/partnerships": "/#partners",
     "/contact": "/#contact", "/thankyou": "/#contact",
     "/team": "/#advisor",
     "/apply": "/waitlist", "/careers": "/waitlist",
     "/for-firms": "/#start",
-    "/faq": "/",
     "/preview": "/", "/preview/research": "/research",
 }
 
 
 @app.route("/about")
 @app.route("/our-story")
-@app.route("/partnerships")
 @app.route("/contact")
 @app.route("/thankyou")
 @app.route("/team")
 @app.route("/apply")
 @app.route("/careers")
 @app.route("/for-firms")
-@app.route("/faq")
 @app.route("/preview")
 @app.route("/preview/research")
 def old_page():

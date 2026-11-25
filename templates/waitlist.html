@@ -22,6 +22,11 @@
   .back{align-self:flex-start;display:inline-flex;align-items:center;gap:12px;font-weight:500;font-size:16px;color:var(--ink);padding-bottom:8px;border-bottom:1px solid var(--stone-400);line-height:normal}
   .back:hover{border-color:var(--ink)}
   .back img{width:18px;height:18px;transform:rotate(180deg)}
+  /* Desktop: one 1440x1024 screen at 70% scale, like the homepage sections */
+  @media (min-width:1181px){
+    .wl{min-height:1024px;display:flex;align-items:center;padding:70px 0 30px}
+    .wl .frame{zoom:.7;max-width:1440px;min-height:0;padding:40px 80px}
+  }
   @media (max-width:1180px){
     .wl .frame{flex-direction:column}
     .wl-card{width:100%;max-width:600px}

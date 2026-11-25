@@ -1,0 +1,89 @@
+{% extends 'layout.html' %}
+{% block title %}Partnerships — Vantedge{% endblock %}
+{% block description %}Vantedge partner universities: on-the-ground chapters running local events, research, and recruitment.{% endblock %}
+{% block styles %}
+<style>
+  /* ---------- Header (same as the Research page) ---------- */
+  .r-head .frame{padding:200px 80px 72px;display:flex;flex-direction:column;gap:20px}
+  .r-head .kick{font-size:13px;letter-spacing:3.12px;text-transform:uppercase;color:var(--stone-700);line-height:normal}
+  .r-head h1{font-family:var(--display);font-weight:700;font-size:60px;line-height:1.05;letter-spacing:-1.5px}
+  .r-head p{font-size:22px;line-height:1.55;color:var(--stone-750)}
+
+  /* ---------- Partner universities ---------- */
+  .partners .frame{padding:0 80px 140px}
+  .chapters{display:flex;gap:32px}
+  .chapter{flex:1 0 0;min-width:0;background:var(--paper);border-radius:12px;overflow:hidden;box-shadow:0 10px 28px -4px rgba(12,14,30,.06);transition:transform .3s ease,box-shadow .3s ease}
+  .chapter:hover{transform:translateY(-4px);box-shadow:0 18px 40px -6px rgba(12,14,30,.12)}
+  .campus{position:relative;height:300px;overflow:hidden}
+  .campus img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+  .chapter:hover .campus img{transform:scale(1.03)}
+  .tag{position:absolute;top:24px;right:24px;background:var(--stone-750);color:var(--paper);font-size:12px;letter-spacing:2.4px;text-transform:uppercase;padding:9px 16px;line-height:normal}
+  .ch-body{padding:36px 40px 32px;display:flex;flex-direction:column;gap:24px}
+  .identity{display:flex;align-items:center;gap:16px}
+  .tile{width:60px;height:60px;border-radius:8px;border:1px solid var(--stone-300);background:var(--paper);display:grid;place-items:center;flex:none}
+  .tile img{width:46px;height:46px;object-fit:cover}
+  .identity h3{font-family:var(--inter);font-weight:600;font-size:24px;letter-spacing:-.36px;line-height:normal}
+  .identity span{display:block;margin-top:2px;font-size:16px;letter-spacing:.48px;color:var(--stone-700);line-height:normal}
+  .ch-body > p{font-size:17px;line-height:1.65}
+  .ch-body > p:first-of-type{flex:1}
+  .join{display:flex;justify-content:center;width:100%;padding:18px 0;border-radius:999px;background:var(--stone-750);color:var(--paper);font-family:var(--inter);font-weight:500;font-size:14px;letter-spacing:2.8px;text-transform:uppercase;line-height:normal;transition:background .2s}
+  .join:hover{background:var(--graphite)}
+  .ch-body .note{font-size:14px;color:var(--stone-700);text-align:center;line-height:normal}
+  .ch-body .note b{font-weight:400;color:var(--ink)}
+
+  /* Desktop: one 1440x1024 screen, content at 70% scale — same treatment as the homepage sections */
+  @media (min-width:901px){
+    .p-screen{min-height:1024px;display:flex;flex-direction:column;justify-content:center;padding:70px 0 40px}
+    .r-head .frame,.partners .frame{zoom:.7;max-width:1440px}
+    .r-head .frame{padding:0 80px 48px}
+    .partners .frame{padding:0 80px}
+  }
+
+  @media (max-width:900px){
+    .r-head .frame{padding:120px 24px 40px}
+    .r-head h1{font-size:48px;letter-spacing:-1.6px}
+    .r-head p{font-size:18px}
+    .partners .frame{padding:0 24px 96px}
+    .chapters{flex-direction:column}
+    .chapter{flex:none}
+    .ch-body{padding:28px 24px}
+    .campus{height:240px}
+    .tag{top:14px;right:14px;max-width:calc(100% - 28px);font-size:10px;letter-spacing:1.8px;padding:7px 12px}
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="p-screen">
+<section class="r-head">
+  <div class="frame">
+    <span class="kick">Partner universities</span>
+    <h1>Chapters</h1>
+    <p>Our on-the-ground chapters running local events, research, and recruitment.</p>
+  </div>
+</section>
+
+<section class="partners" id="partners">
+  <div class="frame">
+    <div class="chapters">
+      <article class="chapter">
+        <div class="campus"><img src="{{ S }}campus-bocconi.png" alt="Milan Cathedral square" /><span class="tag">Founding chapter · Milan, Italy</span></div>
+        <div class="ch-body">
+          <div class="identity"><span class="tile"><img src="{{ S }}logo-bocconi.png" alt="Bocconi logo" /></span><div><h3>Bocconi University</h3><span>Europe Research Hub</span></div></div>
+          <p>As our founding chapter, Bocconi University serves as the central operational hub for Vantedge in Europe. We run local in-person events, workshops, and networking sessions on campus, allowing students to connect face-to-face while collaborating with our wider global research team.</p>
+          <a class="join" href="{{ waitlist_url }}">Interested to join?</a>
+        </div>
+      </article>
+      <article class="chapter">
+        <div class="campus"><img src="{{ S }}campus-bath.png" alt="Pulteney Bridge, Bath" /><span class="tag">Established chapter · United Kingdom</span></div>
+        <div class="ch-body">
+          <div class="identity"><span class="tile"><img src="{{ S }}logo-bath.png" alt="University of Bath logo" /></span><div><h3>University of Bath</h3><span>UK Research Hub</span></div></div>
+          <p>Our Bath Chapter powers Vantedge's presence and research initiatives in the UK. If you're a student at the University of Bath looking to gain hands-on corporate finance experience, contribute to cross-border research, or lead local campus initiatives, our UK team is actively recruiting.</p>
+          <a class="join" href="{{ waitlist_url }}">Interested to join?</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+</div>
+{% endblock %}
